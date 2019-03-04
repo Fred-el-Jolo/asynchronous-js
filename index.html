@@ -63,8 +63,18 @@
 					</code></pre>
 					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
 				</section>
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+const asyncCallback = (success, error) => {
+  const callback = Math.random() > .5 ? success : error;
+  setTimeout(callback, 0, 'Fredddy');
+}
+
+asyncCallback((name)=>{
+console.log(name);
+}, (name)=>{
+console.log('error');
+})
+        </section>
 			</div>
 		</div>
 
