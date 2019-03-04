@@ -78,3 +78,8 @@ based on dark.css by Ivan Sagalaev
 .hljs-strong {
   font-weight: bold;
 }
+
+.hljs-custom-blur-code, .hljs-custom-blur-code * {
+  background-color: transparent;
+  color: #7f9f7f !important
+}
