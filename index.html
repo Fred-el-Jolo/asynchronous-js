@@ -59,21 +59,21 @@
             <p>No parallel access or update to shared memory</p>
           <p>Run-to-completion</p>
           <p>Race conditions only at function level</p>
+          <p>Event loop tasks are executed one by one</p>
+          <p>if encounter async callback, insert it into the task queue when </p>
           
-
           <h3>Our brain is synchronous</h3>
           <p>High level thinking is synchronous, single tasked</p>
           <p>If faking multitasking, lose focus ; actually quickly switching from one task to another</p>
           <p>Do tasks one after the another, step by step, each step blocking the next one</p>
+          <p>Our brain = event loop</p>
           
           <p>Sync code</p>
 
+
           <p>Async code</p>
-
-          <p>Our brain = event loop</p>
           <p>Make it hard to read & understand async code (that will be executed later)</p>
-
-            
+          
           </ol>
         </section>
 
