@@ -1,51 +1,95 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/zenburn.css" />
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h1>Asynchronous javascript through the ages</h1>
-					<h3>JS Sophia - 14th March, 2019</h3>
-					<p>
-						<small>Created by <a href="">Fred Guillaume</a></small>
-					</p>
-				</section>
-
-				<section>
-					<h2>Agenda</h2>
-					<ol>
-						<li>Asynchronous code</li>
-						<li>Callbacks</li>
-						<li>Promises</li>
-						<li>Generators</li>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.type = "text/css";
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? "css/print/pdf.css"
+        : "css/print/paper.css";
+      document.getElementsByTagName("head")[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Asynchronous javascript through the ages</h1>
+          <h3>JS Sophia - 14th March, 2019</h3>
+          <p>
+            <small>Created by <a href="">Fred Guillaume</a></small>
+          </p>
+        </section>
+        <section>
+          <h2>Agenda</h2>
+          <ol>
+            <li>Sync vs Async</li>
+            <li>Event loop & queues</li>
+            <li>Callbacks</li>
+            <li>Promises</li>
+            <li>Generators</li>
             <li>Await/async</li>
-					</ol>
-          <aside class="notes">Zurglb functions !!! Why asynchronous code matters</aside>
-				</section>
-				<section>
-					<h2>Pretty Code</h2>
-					<pre><code class="hljs" data-trim data-noescape>
+          </ol>
+          <aside class="notes">
+            Zurglb functions !!! Why asynchronous code matters
+          </aside>
+        </section>
+
+        <section>
+          <h2>Sync vs Async</h2>
+          <h3>Event loop</h3>
+          <p>Parallel (simultaneously) vs async (later, after an undefined amount of time)</p>
+          <p>List of tasks executed in sequence</p>
+            <p>No parallel access or update to shared memory</p>
+          <p>Run-to-completion</p>
+          <p>Race conditions only at function level</p>
+          
+
+          <h3>Our brain is synchronous</h3>
+          <p>High level thinking is synchronous, single tasked</p>
+          <p>If faking multitasking, lose focus ; actually quickly switching from one task to another</p>
+          <p>Do tasks one after the another, step by step, each step blocking the next one</p>
+          
+          <p>Sync code</p>
+
+          <p>Async code</p>
+
+          <p>Our brain = event loop</p>
+          <p>Make it hard to read & understand async code (that will be executed later)</p>
+
+            
+          </ol>
+        </section>
+
+        <section>
+          <h2>Callback hell</h2>
+          <ol>
+            <li>Code nesting</li>
+            <li>Complex workflow</li>
+            <li>too early, too late, never</li>
+
+          </ol>
+        </section>
+
+        <section>
+          <h2>Pretty Code</h2>
+          <pre><code class="hljs" data-trim data-noescape>
             <mark class="hljs-custom-blur-code">function linkify( selector ) {
               if( supports3DTransforms ) {
 
@@ -61,37 +105,48 @@
               }
             }</mark>
 					</code></pre>
-					<p>Code syntax highlighting courtesy of <a href="http://softwaremaniacs.org/soft/highlight/en/description/">highlight.js</a>.</p>
-				</section>
-				<section>
-const asyncCallback = (success, error) => {
-  const callback = Math.random() > .5 ? success : error;
-  setTimeout(callback, 0, 'Fredddy');
-}
-
-asyncCallback((name)=>{
-console.log(name);
-}, (name)=>{
-console.log('error');
-})
+          <p>
+            Code syntax highlighting courtesy of
+            <a href="http://softwaremaniacs.org/soft/highlight/en/description/"
+              >highlight.js</a
+            >.
+          </p>
         </section>
-			</div>
-		</div>
+        <section>
+          const asyncCallback = (success, error) => { const callback =
+          Math.random() > .5 ? success : error; setTimeout(callback, 0,
+          'Fredddy'); } asyncCallback((name)=>{ console.log(name); }, (name)=>{
+          console.log('error'); })
+        </section>
+      </div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          },
+          { src: "plugin/notes/notes.js", async: true },
+          {
+            src: "plugin/highlight/highlight.js",
+            async: true,
+            callback: function() {
+              hljs.initHighlightingOnLoad();
+            }
+          }
+        ]
+      });
+    </script>
+  </body>
 </html>
