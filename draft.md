@@ -37,6 +37,8 @@
 - definition
 - how it works
 - what problem does it solve ?
+- Best practices
+  - always return something
 
 ## Generators
 - definition

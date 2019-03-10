@@ -40,7 +40,6 @@
           <h2>Agenda</h2>
           <ol>
             <li>Sync vs Async</li>
-            <li>Event loop & queues</li>
             <li>Callbacks</li>
             <li>Promises</li>
             <li>Generators</li>
@@ -50,31 +49,71 @@
             Zurglb functions !!! Why asynchronous code matters
           </aside>
         </section>
-
         <section>
-          <h2>Sync vs Async</h2>
-          <h3>Event loop</h3>
-          <p>Parallel (simultaneously) vs async (later, after an undefined amount of time)</p>
-          <p>List of tasks executed in sequence</p>
-            <p>No parallel access or update to shared memory</p>
-          <p>Run-to-completion</p>
-          <p>Race conditions only at function level</p>
-          <p>Event loop tasks are executed one by one</p>
-          <p>if encounter async callback, insert it into the task queue when </p>
-          
+          <h2>Sync & async</h2>
+          <p>How do we think about</p>
+          <p>How do we read</p>
+          <p>How do we write</p>
+          <p>code ?</p>
+          <aside class="notes"></aside>
+        </section>
+        <section>
           <h3>Our brain is synchronous</h3>
           <p>High level thinking is synchronous, single tasked</p>
-          <p>If faking multitasking, lose focus ; actually quickly switching from one task to another</p>
-          <p>Do tasks one after the another, step by step, each step blocking the next one</p>
+          <aside class="notes"></aside>
+        </section>
+        <section>
+          <p>Can't you multitask ? Because I can !!!</p>
+          <p>"Faking" multitasking</p>
+          <p>Lose focus</p>
+          <p>Quickly switching from one task to another</p>
+          <aside class="notes"></aside>
+        </section>
+        <section>
+          <p>How do we work best ?</p>
+          <p>Do tasks one after the another</p>
           <p>Our brain = event loop</p>
-          
+          <aside class="notes"></aside>
+        </section>
+        <section class="draft">
+          <p>When we think</p>
+          <p>Why does it matters ?</p>
+          <p>Threads ?</p>
+          <p>Parallel = simultaneously</p>
+          <p>=> later, after an undefined amount of time</p>
+          <p>Race conditions only at function level</p>
+          <p>Event loop tasks are executed one by one</p>
+        </section>
+        <section>
+          <h3>Event loop</h3>
+          <p>Single threaded</p>
+          <p>No parallel access</p>
+          <p>No shared memory</p>
+        </section>
+        <section>
+          <p>Run-to-completion</p>
+          <p>No parallel access or update to shared memory</p>
+          <p>Call stack & callback queue</p>
+        </section>
+        <section>
+          <p>Call stack</p>
+          <p>Web / browser API</p>
+          <p>Callback queue</p>
+        </section>
+        <section>
           <p>Sync code</p>
 
-
           <p>Async code</p>
-          <p>Make it hard to read & understand async code (that will be executed later)</p>
-          
-          </ol>
+          <p>
+            Make it hard to read & understand async code (that will be executed
+            later)
+          </p>
+
+          <aside class="notes">
+            https://www.youtube.com/watch?v=8aGhZQkoFbQ
+            http://latentflip.com/loupe/
+            https://flaviocopes.com/javascript-event-loop/#blocking-the-event-loop
+          </aside>
         </section>
 
         <section>
@@ -83,7 +122,6 @@
             <li>Code nesting</li>
             <li>Complex workflow</li>
             <li>too early, too late, never</li>
-
           </ol>
         </section>
 
