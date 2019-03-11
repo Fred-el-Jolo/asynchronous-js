@@ -87,41 +87,37 @@
         <section>
           <h3>Event loop</h3>
           <p>Single threaded</p>
+          <p>Run-to-completion</p>
           <p>No parallel access</p>
           <p>No shared memory</p>
         </section>
         <section>
-          <p>Run-to-completion</p>
-          <p>No parallel access or update to shared memory</p>
+          <h3>Blocking the event loop</h3>
+          <p>A blocking thread will prevent any other threads from running</p>
+          <p>Blocks the whole stack</p>
+          <p>Use of asynchronous callbacks</p>
+        </section>
+        <section>
+          <h2>Callbacks</h2>
           <p>Call stack & callback queue</p>
-        </section>
-        <section>
-          <p>Call stack</p>
-          <p>Web / browser API</p>
-          <p>Callback queue</p>
-        </section>
-        <section>
-          <p>Sync code</p>
-
-          <p>Async code</p>
-          <p>
-            Make it hard to read & understand async code (that will be executed
-            later)
-          </p>
-
+          <p>Solution to avoid blocking the event loop</p>
+          <p>Execute code after an undefined (and unknown) amount of time</p>
           <aside class="notes">
             https://www.youtube.com/watch?v=8aGhZQkoFbQ
             http://latentflip.com/loupe/
             https://flaviocopes.com/javascript-event-loop/#blocking-the-event-loop
           </aside>
         </section>
-
         <section>
           <h2>Callback hell</h2>
+          <p>What is callback hell ?</p>
           <ol>
             <li>Code nesting</li>
-            <li>Complex workflow</li>
-            <li>too early, too late, never</li>
+            <li>Execution order</li>
+            <li>Tighlty coupled callbacks</li>
+            <li>Error management</li>
+            <li>Complex even with simple workflows</li>
+            <li>What if executed too early, too late, never, too many times</li>
           </ol>
         </section>
 
