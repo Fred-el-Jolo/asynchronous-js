@@ -360,6 +360,44 @@
           <p>Code boilerplate</p>
         </section>
         <section>
+          <h2>Generators</h2>
+          <p>Express async flow control in a sequential style</p>
+          <p>Iterator & iterable</p>
+          <p class="indent">
+            Iterable : Must have a Symbol.iterator function on it.
+          </p>
+          <p class="indent">Returns an iterator</p>
+        </section>
+        <section>
+          <p>Multiple iterators</p>
+          <p>Interleaving</p>
+          <p>Terminating the generator</p>
+          <p class="indent">Automatic with for..of</p>
+          <p class="indent">
+            Call return method on iterator to send the terminal signal. Also
+            sets the returned value to the passed argument.
+          </p>
+          <p class="indent">
+            Note that a finally clause in the generator function will always be
+            called upon termination
+          </p>
+        </section>
+        <section>
+          <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
+          <p>
+            Generator listen for a promise to resolve and then resume the
+            generator with the fulfillment message or whith an error thrown
+          </p>
+          <p>
+            Pause the generator by getting back a promise, and resume it when
+            that promise fulfills or rejects !!!
+          </p>
+        </section>
+        <section>
+          <h2>Async/await</h2>
+          <p>Handle the</p>
+        </section>
+        <section>
           <h2>Pretty Code</h2>
           <pre><code class="hljs" data-trim data-noescape>
             <mark class="hljs-custom-blur-code">function linkify( selector ) {
@@ -400,6 +438,10 @@
       // More info about config & dependencies:
       // - https://github.com/hakimel/reveal.js#configuration
       // - https://github.com/hakimel/reveal.js#dependencies
+
+      // Shows the slide number using default formatting
+      Reveal.configure({ slideNumber: true });
+
       Reveal.initialize({
         dependencies: [
           {
