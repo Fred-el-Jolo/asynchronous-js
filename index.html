@@ -30,6 +30,13 @@
     <div class="reveal">
       <div class="slides">
         <section>
+          TODO : <br />
+          Fulfill: First then param<br />
+          Reject: Second then param<br />
+          Resolve: First constructor param, can result in fulfillment or
+          rejection
+        </section>
+        <section>
           <h1>Asynchronous javascript through the ages</h1>
           <h3>JS Sophia - 14th March, 2019</h3>
           <p>
@@ -100,8 +107,12 @@
         <section>
           <h2>Callbacks</h2>
           <p>Call stack & callback queue</p>
-          <p>Solution to avoid blocking the event loop</p>
+          <p>Avoid blocking the event loop</p>
           <p>Execute code after an undefined (and unknown) amount of time</p>
+          <p>
+            Callbacks execution are deferred later by third party code:
+            inversion of control
+          </p>
           <aside class="notes">
             https://www.youtube.com/watch?v=8aGhZQkoFbQ
             http://latentflip.com/loupe/
@@ -115,12 +126,239 @@
             <li>Code nesting</li>
             <li>Execution order</li>
             <li>Tighlty coupled callbacks</li>
-            <li>Error management</li>
             <li>Complex even with simple workflows</li>
             <li>What if executed too early, too late, never, too many times</li>
+            <li>Error management</li>
+            <li class="nested">Third party code cannot be trusted</li>
+            <li class="nested">Your own code cannot be trusted</li>
           </ol>
         </section>
-
+        <section>
+          <p>Some solutions exists</p>
+          <p>split callbacks</p>
+          <p>"error first" style</p>
+          <p>Not perfect</p>
+          <p class="nested">success and error at the same time</p>
+          <p class="nested">lot of extra code needed</p>
+          <aside>
+            <ul>
+              <li>error first => node style</li>
+            </ul>
+          </aside>
+        </section>
+        <section>
+          <h2>Promises</h2>
+          <p>Callback is execution is handle by external code => IoC</p>
+          <p>What if we could uninvert that inversion of control ?</p>
+          <p>
+            Callback mechanism: pass callback function to external code. The
+            callback will be called upon code completion
+          </p>
+          <p>
+            Instead, return an event-subscription capable object, with
+            "completion" and "failure" events
+          </p>
+          <p>Promise events</p>
+        </section>
+        <section>
+          <p>Promise allow flow control</p>
+          <p>
+            Function can be called when promise resolves, regardless if it is a
+            success or a failure
+          </p>
+          <pre><code class="hljs" data-trim>
+            function foo( promise ) {
+              if( supports3DTransforms ) {
+                promise.then(function() {
+                  // Code executed on promise fulfillment
+                },function() {
+                  // Code executed on promise failure
+                });
+              }
+            }
+            </code></pre>
+        </section>
+        <section>
+          <p>
+            Function can be called only when promise is fulfilled, or is
+            rejected
+          </p>
+          <pre><code class="hljs" data-trim>
+            promise.then(bar, errorBar);
+          </code></pre>
+        </section>
+        <section>
+          <p>Once fulfilled, a promise is immutable</p>
+        </section>
+        <section>
+          <h3>Thenable duck typing</h3>
+          <p>
+            Any object or function that has a <code>then</code> method on it
+          </p>
+        </section>
+        <section>
+          <h3>Promise & job queue</h3>
+          <p>
+            When calling then, the callback will always be called asynchronously
+          </p>
+          <p>Higher priority than callbacks</p>
+          <aside>
+            https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+          </aside>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Call the callback too early</h4>
+          <p>What happens if a promise is immediately fulfilled ?</p>
+          <p>
+            In any cases, the then callback will be executed asynchronously
+            through the microtask queue
+          </p>
+          <p>
+            Promise resolve synchronous & asynchronous code the same predictable
+            way
+          </p>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Call the callback too late</h4>
+          <p>
+            When a promise is fulfilled, every then callback registered will be
+            called in order in the next microtask queue execution
+          </p>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Callback never called</h4>
+          <p>If a promise is resolved, wether it is fulfilled or not</p>
+          <p>Promise.race</p>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Callback called too few or too many times</h4>
+          <p>A promise only resolves once, after it stays immutable</p>
+          <p>Then registered callbacks will only be executed once</p>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Parameters issues</h4>
+          <p>No parameters: resolves with <code>undefined</code></p>
+          <p>More than one paramter: subsequent ones are ignored</p>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Trustable ?</h4>
+          <p>Promise.resolve</p>
+          <p>
+            If pass a non-thenable value, it returns a new genuine promise
+            fulfilled with that value
+          </p>
+          <p>If pass a genuine promise value, it returns it back</p>
+          <p>
+            If pass a non-genuine promise value, it unwraps that value up to its
+            final non-thenable value
+          </p>
+          <p>Promise.resolve always return a trustable genuine promise value</p>
+          <aside>
+            Functions that return both asynchronous & synchronous values
+          </aside>
+        </section>
+        <section>
+          <h3>Promise trust</h3>
+          <h4>Chain flow</h4>
+          <p>
+            The value returned from a fulfillment callback is automatically set
+            as the fulfillment of the next chained promise
+          </p>
+        </section>
+        <section>
+          <h3>Promise advanced</h3>
+          <h4>Default handles</h4>
+          <p>fulfillment</p>
+          <pre><code class="hljs" data-trim>
+            function(v) {
+              return v;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <h3>Promise advanced</h3>
+          <h4>Default handles</h4>
+          <p>Rejection</p>
+          <pre><code class="hljs" data-trim>
+            function(err) {
+              throw err;
+            }
+          </code></pre>
+        </section>
+        <section>
+          <p>Then Fulfill handler unwrap promise value</p>
+          <p>Then Error handlet does not unwrap promise value</p>
+        </section>
+        <section>
+          <p>Swallowed errors</p>
+          <p>
+            If an error is thrown in then callbacks, it will affect the next
+            chained promise
+          </p>
+          <p>Add a catch statement at the end</p>
+          <p>
+            Errors in that catch, what about the promise returned by the catch
+            method ?
+          </p>
+        </section>
+        <section>
+          <h3>Promise patterns</h3>
+          <p>Promise.all([])</p>
+          <p>Argument: array of promise instances</p>
+          <p>
+            Fulfilled if every promise are fulfilled. If one is rejected,
+            Promise.all is immediately rejected
+          </p>
+          <p>
+            An array of every fulfillment messages is passed to the then fulfill
+            callback
+          </p>
+          <aside>Always attach rejection handler when using all !!!</aside>
+        </section>
+        <section>
+          <h3>Promise patterns</h3>
+          <p>Promise.race([])</p>
+          <p>Argument: array of promise instances</p>
+          <p>
+            Fulfilled when any promise fulfill, and rejected when any promise
+            reject
+          </p>
+          <p>
+            An array of every fulfillment messages is passed to the then fulfill
+            callback
+          </p>
+        </section>
+        <section>
+          <h3>Promise patterns</h3>
+          <p>none</p>
+          <p>any</p>
+          <p>first</p>
+          <p>last</p>
+        </section>
+        <section>
+          <h3>Promise limitations</h3>
+          <p>Sequence error handling</p>
+          <p>
+            Can handle error at the end of the chain. But errors might be
+            silenced inside the chain.
+          </p>
+          <p>Same as try/catch statement that silent an error</p>
+          <p>No reference to intermediate steps</p>
+          <p>Single value (must use object or array)</p>
+          <p>Only single resolution</p>
+          <p>Cannot be canceled</p>
+          <p>
+            Less performant (but more error-proof) => achieve the same with
+            callbacks ?
+          </p>
+          <p>Code boilerplate</p>
+        </section>
         <section>
           <h2>Pretty Code</h2>
           <pre><code class="hljs" data-trim data-noescape>
