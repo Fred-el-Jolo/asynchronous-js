@@ -74,9 +74,7 @@
             <li>Generators</li>
             <li>Await/async</li>
           </ol>
-          <aside class="notes">
-            Zurglb functions !!! Why asynchronous code matters
-          </aside>
+          <aside class="notes"></aside>
         </section>
         <section>
           <h2>Sync & async</h2>
@@ -125,6 +123,7 @@
           <p>A blocking thread will prevent any other threads from running</p>
           <p>Blocks the whole stack</p>
           <p>Use of asynchronous callbacks</p>
+          <section>TODO: blocked event loop</section>
         </section>
         <section>
           <h2>Callbacks</h2>
@@ -135,6 +134,7 @@
             Callbacks execution are deferred later by third party code:
             inversion of control
           </p>
+          <section>TODO: API calls</section>
           <aside class="notes">
             https://www.youtube.com/watch?v=8aGhZQkoFbQ
             http://latentflip.com/loupe/
@@ -146,8 +146,11 @@
           <p>What is callback hell ?</p>
           <ol>
             <li>Code nesting</li>
+            <li>TODO: add sample</li>
             <li>Execution order</li>
+            <li>TODO: add sample</li>
             <li>Tighlty coupled callbacks</li>
+            <li>TODO: add sample</li>
             <li>Complex even with simple workflows</li>
             <li>What if executed too early, too late, never, too many times</li>
             <li>Error management</li>
@@ -158,7 +161,9 @@
         <section>
           <p>Some solutions exists</p>
           <p>split callbacks</p>
+          <p>TODO: add sample</p>
           <p>"error first" style</p>
+          <p>TODO: add sample</p>
           <p>Not perfect</p>
           <p class="nested">success and error at the same time</p>
           <p class="nested">lot of extra code needed</p>
