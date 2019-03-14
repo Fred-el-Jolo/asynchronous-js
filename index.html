@@ -563,102 +563,165 @@
           </code></pre>
         </section>
         <section>
-          <p>Then Fulfill handler unwrap promise value</p>
-          <p>Then Error handlet does not unwrap promise value</p>
+          <section>
+            <h3>Promise advanced</h3>
+            <p class="fragment">Fulfill handler unwrap promise value</p>
+            <p class="fragment">Error handler does not unwrap promise value</p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-default-handlers.html"
+            ></iframe>
+          </section>
         </section>
         <section>
-          <p>Swallowed errors</p>
-          <p>
-            If an error is thrown in then callbacks, it will affect the next
-            chained promise
-          </p>
-          <p>Add a catch statement at the end</p>
-          <p>
-            Errors in that catch, what about the promise returned by the catch
-            method ?
-          </p>
+          <section>
+            <h3>Promise advanced</h3>
+            <p>Swallowed errors</p>
+            <p class="fragment">
+              If an error is thrown in then callbacks, it will affect the next
+              chained promise
+            </p>
+            <p class="fragment">Add a catch statement at the end</p>
+            <p class="fragment">
+              Errors in that catch, what about the promise returned by the catch
+              method ?
+            </p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-error-swallowing.html"
+            ></iframe>
+          </section>
         </section>
         <section>
           <h3>Promise patterns</h3>
           <p>Promise.all([])</p>
-          <p>Argument: array of promise instances</p>
-          <p>
+          <p class="fragment">
             Fulfilled if every promise are fulfilled. If one is rejected,
             Promise.all is immediately rejected
           </p>
-          <p>
+          <p class="fragment">
             An array of every fulfillment messages is passed to the then fulfill
             callback
           </p>
-          <aside>Always attach rejection handler when using all !!!</aside>
+          <aside class="notes">
+            Always attach rejection handler when using all !!!
+          </aside>
         </section>
         <section>
           <h3>Promise patterns</h3>
           <p>Promise.race([])</p>
-          <p>Argument: array of promise instances</p>
-          <p>
+          <p class="fragment">Argument: array of promise instances</p>
+          <p class="fragment">
             Fulfilled when any promise fulfill, and rejected when any promise
             reject
           </p>
-          <p>
-            An array of every fulfillment messages is passed to the then fulfill
-            callback
-          </p>
-        </section>
-        <section>
-          <h3>Promise patterns</h3>
-          <p>none</p>
-          <p>any</p>
-          <p>first</p>
-          <p>last</p>
+          <aside class="notes">
+            Can derive new patterns from those
+            <p>none</p>
+            <p>any</p>
+            <p>first</p>
+            <p>last</p>
+          </aside>
         </section>
         <section>
           <h3>Promise limitations</h3>
-          <p>Sequence error handling</p>
-          <p>
-            Can handle error at the end of the chain. But errors might be
-            silenced inside the chain.
+          <p class="fragment">Error management</p>
+          <ul>
+            <li class="fragment">
+              Can handle error at the end of the chain.
+            </li>
+            <li class="fragment">
+              But errors might be silenced inside the chain.
+            </li>
+            <li class="fragment">
+              Same as try/catch statement that silent an error
+            </li>
+          </ul>
+          <p class="fragment">No reference to intermediate steps</p>
+          <p class="fragment">
+            Single value parameter (must use object or array)
           </p>
-          <p>Same as try/catch statement that silent an error</p>
-          <p>No reference to intermediate steps</p>
-          <p>Single value (must use object or array)</p>
-          <p>Only single resolution</p>
-          <p>Cannot be canceled</p>
-          <p>
+          <p class="fragment">Only single resolution</p>
+          <p class="fragment">Cannot be canceled</p>
+          <p class="fragment">
             Less performant (but more error-proof) => achieve the same with
             callbacks ?
           </p>
-          <p>Code boilerplate</p>
+          <p class="fragment">Code boilerplate</p>
         </section>
         <section>
           <h2>Generators</h2>
-          <p>Express async flow control in a sequential style</p>
-          <p>Iterator & iterable</p>
-          <p class="indent">
-            Iterable : Must have a Symbol.iterator function on it.
+          <p class="fragment">
+            Express async flow control in a sequential style
           </p>
-          <p class="indent">Returns an iterator</p>
+          <p class="fragment">
+            Iterable: object with a Symbol.iterator property
+          </p>
+          <p class="fragment">Iterator: object with</p>
+          <p class="fragment">next() method</p>
+          <p class="fragment">value property</p>
+          <p class="fragment">done property</p>
+
+          <aside class="notes">
+            value = next value in sequence done = true if last value already be
+            consumed
+          </aside>
         </section>
         <section>
-          <p>Multiple iterators</p>
-          <p>Interleaving</p>
-          <p>Terminating the generator</p>
-          <p class="indent">Automatic with for..of</p>
-          <p class="indent">
-            Call return method on iterator to send the terminal signal. Also
-            sets the returned value to the passed argument.
-          </p>
-          <p class="indent">
-            Note that a finally clause in the generator function will always be
-            called upon termination
-          </p>
+          <section>
+            <p class="fragment">
+              When called, a generator function will return an iterator
+            </p>
+            <p class="fragment">
+              When a value is consumed with the iterator (<code>next</code>
+              method), the generator function executes until it encounters the
+              <code>yield</code> keyword
+            </p>
+            <p class="fragment">
+              <code>return</code> method on iterator to send the terminal signal
+            </p>
+            <p class="fragment">
+              A finally clause in the generator function will always be called
+              upon termination
+            </p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/simple-generator-1.html"
+            ></iframe>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/simple-generator-2.html"
+            ></iframe>
+          </section>
         </section>
         <section>
-          <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
-          <p>
-            Generator listen for a promise to resolve and then resume the
-            generator with the fulfillment message or whith an error thrown
-          </p>
+          <section>
+            <p class="fragment">Multiple iterators</p>
+            <p class="fragment">Interleaving</p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/advanced-generators-1.html"
+            ></iframe>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/advanced-generators-2.html"
+            ></iframe>
+          </section>
+        </section>
+        <section>
+          <p>What if we yield a promise ?</p>
           <p>
             Pause the generator by getting back a promise, and resume it when
             that promise fulfills or rejects !!!
@@ -666,8 +729,17 @@
         </section>
         <section>
           <h2>Async/await</h2>
-          <p>Handle the</p>
+          <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
         </section>
+
+        <section id="playground">
+          <h2>Playground</h2>
+          <iframe
+            class="stretch"
+            data-src="http://localhost:8000/interactive-examples/pages/js/playground.html"
+          ></iframe>
+        </section>
+
         <section>
           <h2>Pretty Code</h2>
           <pre><code class="hljs" data-trim data-noescape>
