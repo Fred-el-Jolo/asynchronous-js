@@ -30,35 +30,6 @@
     <div class="reveal">
       <div class="slides">
         <section>
-          TODO : <br />
-          Fulfill: First then param<br />
-          Reject: Second then param<br />
-          Resolve: First constructor param, can result in fulfillment or
-          rejection
-        </section>
-
-        <section>
-          <iframe
-            class="stretch"
-            data-src="http://localhost:8000/interactive-examples/pages/js/array-push.html"
-          ></iframe>
-        </section>
-
-        <section>
-          <iframe
-            class="stretch"
-            data-src="http://localhost:8000/interactive-examples/pages/js/array-concat.html"
-          ></iframe>
-        </section>
-
-        <section>
-          <iframe
-            class="stretch"
-            data-src="http://localhost:8000/interactive-examples/pages/js/array-function.html"
-          ></iframe>
-        </section>
-
-        <section>
           <h1>Asynchronous javascript, from hell to paradise</h1>
           <h3>JS Sophia - 14th March, 2019</h3>
           <p>
@@ -78,48 +49,65 @@
         </section>
         <section>
           <h2>Sync & async</h2>
-          <p class="fragment">How do we think about</p>
-          <p class="fragment">How do we read</p>
-          <p class="fragment">How do we write</p>
-          <p class="fragment">code ?</p>
+          <ul class="no-bullet">
+            <li class="fragment">How do we think about</li>
+            <li class="fragment">How do we read</li>
+            <li class="fragment">How do we write</li>
+            <li class="fragment">code ?</li>
+          </ul>
           <aside class="notes"></aside>
         </section>
         <section>
           <h3>Our brain is synchronous</h3>
-          <p>High level thinking is synchronous, single tasked</p>
+          <ul class="no-bullet">
+            <li class="fragment">
+              High level thinking is synchronous, single tasked
+            </li>
+          </ul>
+          <p></p>
           <aside class="notes"></aside>
         </section>
         <section>
-          <p>Can't you multitask ? Because I can !!!</p>
-          <p class="fragment">"Faking" multitasking</p>
-          <p class="fragment">Lose focus</p>
-          <p class="fragment">Quickly switching from one task to another</p>
+          <h3>Our brain is synchronous</h3>
+          <ul class="no-bullet">
+            <li class="fragment">Can't you multitask ? Because I can !!!</li>
+            <li class="fragment">"Faking" multitasking</li>
+            <li class="fragment">Lose focus</li>
+            <li class="fragment">Quickly switching from one task to another</li>
+          </ul>
           <aside class="notes"></aside>
         </section>
         <section>
-          <p>How do we work best ?</p>
-          <p class="fragment">Do tasks one after the another</p>
-          <p class="fragment">Our brain = event loop</p>
+          <h3>Our brain is synchronous</h3>
+          <ul class="no-bullet">
+            <li class="fragment">How do we work best ?</li>
+            <li class="fragment">Do tasks one after the another</li>
+            <li class="fragment">Our brain = event loop</li>
+          </ul>
           <aside class="notes"></aside>
         </section>
         <section>
           <h3>Event loop</h3>
-          <p class="fragment">Single threaded</p>
-          <p class="fragment">Run-to-completion</p>
-          <p class="fragment">No parallel access</p>
-          <p class="fragment">No shared memory</p>
+          <ul class="no-bullet">
+            <li class="fragment">Single threaded</li>
+            <li class="fragment">Run-to-completion</li>
+            <li class="fragment">No parallel access</li>
+            <li class="fragment">No shared memory</li>
+          </ul>
         </section>
         <section>
           <section>
             <h3>Blocking the event loop</h3>
-            <p class="fragment">
-              A blocking thread will prevent any other threads from running
-            </p>
-            <p class="fragment">Blocks the whole stack</p>
-            <p class="fragment">Use of asynchronous callbacks</p>
+            <ul class="no-bullet">
+              <li class="fragment">
+                A blocking thread will prevent any other threads from running
+              </li>
+              <li class="fragment">Blocks the whole stack</li>
+              <li class="fragment">Use of asynchronous callbacks</li>
+            </ul>
           </section>
           <section>
-            <h2>Blocking the event loop</h2>
+            <h3>Blocking the event loop</h3>
             <pre><code class="hljs" data-trim>
             const end = Date.now() + 5000;
             while (Date.now() < end) {
@@ -131,15 +119,19 @@
         <section>
           <section>
             <h3>Blocking the event loop</h3>
-            <p>Beware of expensive tasks</p>
-            <p class="fragment">
-              <code>JSON.Parse</code> & <code>JSON.stringify</code>
-            </p>
-            <p class="fragment">Regexp matching</p>
-            <p class="fragment">Think about computation time & complexity</p>
+            <ul class="no-bullet">
+              <li class="fragment">Beware of expensive tasks</li>
+              <li class="fragment">
+                <code>JSON.Parse</code> & <code>JSON.stringify</code>
+              </li>
+              <li class="fragment">Regexp matching</li>
+              <li class="fragment">
+                Think about computation time & complexity
+              </li>
+            </ul>
           </section>
           <section>
-            <h2>Expensive regexp</h2>
+            <h4>Expensive regexp</h4>
             <pre><code class="hljs" data-trim>
               app.get('/redos-me', (req, res) => {
                 let filePath = req.query.filePath;
@@ -160,15 +152,17 @@
         <section>
           <section>
             <h2>Callbacks</h2>
-            <p class="fragment">Call stack & callback queue</p>
-            <p class="fragment">Avoid blocking the event loop</p>
-            <p class="fragment">
-              Execute code after an undefined (and unknown) amount of time
-            </p>
-            <p class="fragment">
-              Callbacks execution are deferred later by third party code:
-              inversion of control
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Call stack & callback queue</li>
+              <li class="fragment">Avoid blocking the event loop</li>
+              <li class="fragment">
+                Execute code after an undefined (and unknown) amount of time
+              </li>
+              <li class="fragment">
+                Callbacks execution are deferred later by third party code:
+                inversion of control
+              </li>
+            </ul>
           </section>
           <aside class="notes">
             Note: callbacks do not avoid blocking event loop
@@ -179,11 +173,13 @@
         </section>
         <section>
           <section>
-            <h2>Callback hell</h2>
-            <p>What is callback hell ?</p>
+            <h3>Callback hell</h3>
+            <ul class="no-bullet">
+              <li class="fragment">What is callback hell ?</li>
+            </ul>
           </section>
           <section>
-            <h2>Code nesting</h2>
+            <h4>Code nesting</h4>
             <pre><code class="hljs" data-trim>
               api.getUser(loggin, function(err, data) {
                 // ...
@@ -217,10 +213,12 @@
               class="stretch"
               data-src="http://localhost:8000/interactive-examples/pages/js/callback-exec-order-2.html"
             ></iframe>
-            <p class="fragment">Complex even with simple workflows</p>
+            <ul class="no-bullet">
+              <li class="fragment">Complex even with simple workflows</li>
+            </ul>
           </section>
           <section>
-            <h2>Tighlty coupled callbacks</h2>
+            <h4>Tighlty coupled callbacks</h4>
             <pre><code class="hljs" data-trim>
               api.getUser(loggin, function(err, data) {
                 // ...
@@ -237,15 +235,17 @@
             </code></pre>
           </section>
           <section>
-            <h2>Execution issues</h2>
-            <p class="fragment">Executed too early</p>
-            <p class="fragment">too late</p>
-            <p class="fragment">never</p>
-            <p class="fragment">too many times</p>
-            <p class="fragment">too few times</p>
+            <h4>Execution issues</h4>
+            <ul class="no-bullet">
+              <li class="fragment">Callback executed too early...</li>
+              <li class="fragment">... or too late</li>
+              <li class="fragment">Maybe never?</li>
+              <li class="fragment">Whate about too many times ?</li>
+              <li class="fragment">The only missing is too few times !!!!!</li>
+            </ul>
           </section>
           <section>
-            <h2>Error management</h2>
+            <h4>Error management</h4>
             <pre><code class="hljs" data-trim>
               try{
                 api.getUser(loggin, function(err, data) {
@@ -266,8 +266,10 @@
               }
             </code></pre>
             <aside>
-              <li class="nested">Third party code cannot be trusted</li>
-              <li class="nested">Your own code cannot be trusted</li>
+              <ul>
+                <li>Third party code cannot be trusted</li>
+                <li>Your own code cannot be trusted</li>
+              </ul>
             </aside>
           </section>
           <section>
@@ -282,7 +284,7 @@
             <h3>Some solutions exists</h3>
           </section>
           <section>
-            <h3>split callbacks</h3>
+            <h4>split callbacks</h4>
             <pre><code class="hljs" data-trim>
               const successCallback = (data) => console.log(data);
               const errorCallback = (error) => console.error(error);
@@ -291,7 +293,7 @@
             </code></pre>
           </section>
           <section>
-            <h3>"Error first" style</h3>
+            <h4>"Error first" style</h4>
             <pre><code class="hljs" data-trim>
                 async(source, function(err, data) {
                   // ...
@@ -300,10 +302,10 @@
           </section>
           <section>
             <h3>Still a lot to improve</h3>
-            <p class="fragment">success and error at the same time</p>
-            <p class="fragment">
-              lot of extra cumbersome code needed to fix all these issues
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">success and error at the same time</li>
+              <li class="fragment"Lot of extra cumbersome code needed to fix all these issues</li>
+            </ul>
             <aside class="notes">
               <ul>
                 <li>error first => node style</li>
@@ -314,16 +316,13 @@
         <section>
           <section>
             <h2>Promises</h2>
-            <p class="fragment">
-              Callback is execution is handle by external code => IoC
-            </p>
-            <p class="fragment">
-              What if we could uninvert that inversion of control ?
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Callback is execution is handle by external code => IoC</li>
+              <li class="fragment">What if we could uninvert that inversion of control ?</li>
+            </ul>
           </section>
           <section>
-            <h3 class="fragment">Promise "events"</h3>
-
+            <h3>Promise "events"</h3>
             <pre><code class="hljs" data-trim>
               function foo(x) {
                 // start doing something that could take a while
@@ -345,22 +344,22 @@
               } );
             </code></pre>
             <aside class="notes">
-              Instead of passing a callback to async function, get a listener
-              that will trigger when the function has finished
-              <p>
-                Instead, return an event-subscription capable object, with
-                "completion" and "failure" events
-              </p>
+              <ul>
+                <li>Instead of passing a callback to async function, get a listener
+                that will trigger when the function has finished</li>
+                <li>Instead, return an event-subscription capable object, with
+                "completion" and "failure" events</li>
+              </ul>
             </aside>
           </section>
         </section>
         <section>
           <section>
             <h3>Flow control</h3>
-            <p>
-              Function can be called when promise resolves, regardless if it is
-              a success or a failure
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Function can be called when promise resolves, regardless if it is
+              a success or a failure</li>
+            </ul>
             <pre><code class="hljs" data-trim>
             function foo(promise) {
               promise.then(function() {
@@ -373,10 +372,10 @@
           </section>
           <section>
             <h3>Flow control</h3>
-            <p>
-              Function can be called only when promise is fulfilled, or is
-              rejected
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Function can be called only when promise is fulfilled, or is
+              rejected</li>
+            </ul>
             <pre><code class="hljs" data-trim>
               promise.then(bar, errorBar);
             </code></pre>
@@ -401,12 +400,14 @@
         <section>
           <section>
             <h3>Thenable duck typing</h3>
-            <p>
-              Any object or function that has a <code>then</code> method on it
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Any object or function that has a <code>then</code> method on it</li>
+            </ul>
             <aside class="notes">
-              Legacy stuff with packages having already declare
-              <code>then</code> methods...
+              <ul>
+                <li>Legacy stuff with packages having already declare
+                <code>then</code> methods...</li>
+              </ul>
             </aside>
           </section>
           <section>
@@ -445,11 +446,11 @@
         <section>
           <section>
             <h3>Promise & job queue</h3>
-            <p class="fragment">
-              When calling then, the callback will always be called
-              asynchronously
-            </p>
-            <p class="fragment">Higher priority than event queue</p>
+            <ul class="no-bullet">
+              <li class="fragment">When calling then, the callback will always be called
+              asynchronously</li>
+              <li class="fragment">Higher priority than event queue</li>
+            </ul>
             <aside class="notes">
               https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
             </aside>
@@ -465,52 +466,44 @@
         <section>
           <h3>Promise trust</h3>
           <h4>Call the callback too early</h4>
-          <p class="fragment">
-            What happens if a promise is immediately fulfilled ?
-          </p>
-          <p class="fragment">
-            In any cases, the then callback will be executed asynchronously
-            through the microtask queue
-          </p>
-          <p class="fragment">
-            Promise resolve synchronous & asynchronous code the same predictable
-            way
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">What happens if a promise is immediately fulfilled ?</li>
+            <li class="fragment">In any cases, the then callback will be executed asynchronously
+            through the microtask queue</li>
+            <li class="fragment">Promise resolve synchronous & asynchronous code the same predictable
+            way</li>
+          </ul>
         </section>
         <section>
           <h4>Call the callback too late</h4>
-          <p class="fragment">
-            When a promise is fulfilled, every <code>then</code> callback
+          <ul class="no-bullet">
+            <li class="fragment">When a promise is fulfilled, every <code>then</code> callback
             registered will be called in order in the next microtask queue
-            execution
-          </p>
+            execution</li>
+          </ul>
         </section>
         <section>
           <h4>Callback never called</h4>
-          <p class="fragment">
-            If a promise is resolved, its <code>then</code> callbacks will be
-            called wether it is fulfilled or not
-          </p>
-          <p class="fragment">Promise.race</p>
+          <ul class="no-bullet">
+            <li class="fragment">If a promise is resolved, its <code>then</code> callbacks will be
+            called wether it is fulfilled or not</li>
+            <li class="fragment">Promise.race</li>
+          </ul>
         </section>
         <section>
           <h4>Callback called too few or too many times</h4>
-          <p class="fragment">
-            A promise only resolves once, after it stays immutable
-          </p>
-          <p class="fragment">
-            Then registered callbacks will only be executed once
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">A promise only resolves once, after it stays immutable</li>
+            <li class="fragment">Then registered callbacks will only be executed once</li>
+          </ul>
         </section>
         <section>
           <section>
             <h4>Parameters issues</h4>
-            <p class="fragment">
-              No parameters: resolves with <code>undefined</code>
-            </p>
-            <p class="fragment">
-              More than one parameter: subsequent ones are ignored
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">No parameters: resolves with <code>undefined</code></li>
+              <li class="fragment">More than one parameter: subsequent ones are ignored</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -521,29 +514,24 @@
         </section>
         <section>
           <h4>Trustable ?</h4>
-          <p class="fragment">Promise.resolve</p>
-          <p class="fragment">
-            If pass a non-thenable value, it returns a new genuine promise
-            fulfilled with that value
-          </p>
-          <p class="fragment">
-            If pass a genuine promise value, it returns it back
-          </p>
-          <p class="fragment">
-            If pass a non-genuine promise value, it unwraps that value up to its
+          <ul class="no-bullet">
+            <li class="fragment">Promise.resolve</li>
+            <li class="fragment">If pass a non-thenable value, it returns a new genuine promise
+            fulfilled with that value</li>
+            <li class="fragment">If pass a genuine promise value, it returns it back</li>
+            <li class="fragment">If pass a non-genuine promise value, it unwraps that value up to its
             final non-thenable value
-          </p>
-          <p class="fragment">
-            Promise.resolve always return a trustable genuine promise value
-          </p>
+            </p></li>
+            <li class="fragment">Promise.resolve always return a trustable genuine promise value</li>
+          </ul>
         </section>
         <section>
           <section>
             <h4>Chain flow</h4>
-            <p class="fragment">
-              The value returned from a fulfillment callback is automatically
-              set as the fulfillment of the next chained promise
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">The value returned from a fulfillment callback is automatically
+              set as the fulfillment of the next chained promise</li>
+            </ul>
           </section>
           <section id="promise-api-example">
             <iframe
@@ -561,7 +549,9 @@
         </section>
         <section>
           <h3>Promise advanced</h3>
-          <p class="fragment">Default handlers</p>
+          <ul class="no-bullet">
+            <li class="fragment">Default handlers</li>
+          </ul>
           <pre><code class="hljs" data-trim>
             // Success handler
             function(v) {
@@ -577,8 +567,10 @@
         <section>
           <section>
             <h3>Promise advanced</h3>
-            <p class="fragment">Fulfill handler unwrap promise value</p>
-            <p class="fragment">Error handler does not unwrap promise value</p>
+            <ul class="no-bullet">
+              <li class="fragment">Fulfill handler unwrap promise value</li>
+              <li class="fragment">Error handler does not unwrap promise value</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -590,16 +582,14 @@
         <section>
           <section>
             <h3>Promise advanced</h3>
-            <p>Swallowed errors</p>
-            <p class="fragment">
-              If an error is thrown in then callbacks, it will affect the next
-              chained promise
-            </p>
-            <p class="fragment">Add a catch statement at the end</p>
-            <p class="fragment">
-              Errors in that catch, what about the promise returned by the catch
-              method ?
-            </p>
+            <ul class="no-bullet">
+              <li class="fragment">Swallowed errors</li>
+              <li class="fragment">If an error is thrown in then callbacks, it will affect the next
+              chained promise</li>
+              <li class="fragment">Add a catch statement at the end</li>
+              <li class="fragment">Errors in that catch, what about the promise returned by the catch
+              method ?</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -610,27 +600,25 @@
         </section>
         <section>
           <h3>Promise patterns</h3>
-          <p>Promise.all([])</p>
-          <p class="fragment">
-            Fulfilled if every promise are fulfilled. If one is rejected,
-            Promise.all is immediately rejected
-          </p>
-          <p class="fragment">
-            An array of every fulfillment messages is passed to the then fulfill
-            callback
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">Promise.all([])</li>
+            <li class="fragment">Fulfilled if every promise are fulfilled. If one is rejected,
+            Promise.all is immediately rejected</li>
+            <li class="fragment">An array of every fulfillment messages is passed to the then fulfill
+            callback</li>
+          </ul>
           <aside class="notes">
             Always attach rejection handler when using all !!!
           </aside>
         </section>
         <section>
           <h3>Promise patterns</h3>
-          <p>Promise.race([])</p>
-          <p class="fragment">Argument: array of promise instances</p>
-          <p class="fragment">
-            Fulfilled when any promise fulfill, and rejected when any promise
-            reject
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">Promise.race([])</li>
+            <li class="fragment">Argument: array of promise instances</li>
+            <li class="fragment">Fulfilled when any promise fulfill, and rejected when any promise
+            reject</li>
+          </ul>
           <aside class="notes">
             Can derive new patterns from those
             <p>none</p>
@@ -641,43 +629,35 @@
         </section>
         <section>
           <h3>Promise limitations</h3>
-          <p class="fragment">Error management</p>
-          <ul>
-            <li class="fragment">
-              Can handle error at the end of the chain.
+          <ul class="no-bullet">
+            <li class="fragment">Error management
+              <ul class="no-bullet">
+                <li class="fragment">Can handle error at the end of the chain</li>
+                <li class="fragment">But errors might be silenced inside the chain</li>
+                <li class="fragment">Same as try/catch statement that silent an error</li>
+              </ul>
             </li>
-            <li class="fragment">
-              But errors might be silenced inside the chain.
-            </li>
-            <li class="fragment">
-              Same as try/catch statement that silent an error
-            </li>
-          </ul>
-          <p class="fragment">No reference to intermediate steps</p>
-          <p class="fragment">
-            Single value parameter (must use object or array)
-          </p>
-          <p class="fragment">Only single resolution</p>
-          <p class="fragment">Cannot be canceled</p>
-          <p class="fragment">
-            Less performant (but more error-proof) => achieve the same with
-            callbacks ?
-          </p>
-          <p class="fragment">Code boilerplate</p>
+            <li class="fragment">No reference to intermediate steps</li>
+            <li class="fragment">Single value parameter (must use object or array)</li>
+            <li class="fragment">Only single resolution</li>
+            <li class="fragment">Cannot be canceled</li>
+            <li class="fragment">Less performant (but more error-proof) => achieve the same with
+            callbacks ?</li>
+            <li class="fragment">Code boilerplate</li>
         </section>
         <section>
-          <h2>Generators</h2>
-          <p class="fragment">
-            Express async flow control in a sequential style
-          </p>
-          <p class="fragment">
-            Iterable: object with a Symbol.iterator property
-          </p>
-          <p class="fragment">Iterator: object with</p>
-          <p class="fragment">next() method</p>
-          <p class="fragment">value property</p>
-          <p class="fragment">done property</p>
-
+          <h3>Generators</h3>
+          <ul class="no-bullet">
+            <li class="fragment">Express async flow control in a sequential style</li>
+            <li class="fragment">Iterable: object with a Symbol.iterator property</li>
+            <li class="fragment">Iterator: object with
+              <ul class="no-bullet">
+                <li class="fragment"><code>next()</code> method</li>
+                <li class="fragment"><code>value</code> property</li>
+                <li class="fragment"><code>done</code> property</li>
+              </ul>
+            </li>
+          </ul>
           <aside class="notes">
             value = next value in sequence done = true if last value already be
             consumed
@@ -685,21 +665,16 @@
         </section>
         <section>
           <section>
-            <p class="fragment">
-              When called, a generator function will return an iterator
-            </p>
-            <p class="fragment">
-              When a value is consumed with the iterator (<code>next</code>
+            <h3>Generators</h3>
+            <ul class="no-bullet">
+              <li class="fragment">When called, a generator function will return an iterator</li>
+              <li class="fragment">When a value is consumed with the iterator (<code>next</code>
               method), the generator function executes until it encounters the
-              <code>yield</code> keyword
-            </p>
-            <p class="fragment">
-              <code>return</code> method on iterator to send the terminal signal
-            </p>
-            <p class="fragment">
-              A finally clause in the generator function will always be called
-              upon termination
-            </p>
+              <code>yield</code> keyword</li>
+              <li class="fragment"><code>return</code> method on iterator to send the terminal signal</li>
+              <li class="fragment">A finally clause in the generator function will always be called
+              upon termination</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -716,8 +691,10 @@
         </section>
         <section>
           <section>
-            <p class="fragment">Multiple iterators</p>
-            <p class="fragment">Interleaving</p>
+            <ul class="no-bullet">
+              <li class="fragment">Multiple iterators</li>
+              <li class="fragment">Interleaving</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -733,16 +710,18 @@
           </section>
         </section>
         <section>
-          <p>What if we yield a promise ?</p>
-          <p>
-            Pause the generator by getting back a promise, and resume it when
-            that promise fulfills or rejects !!!
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">What if we yield a promise ?</li>
+            <li class="fragment">Pause the generator by getting back a promise, and resume it when
+            that promise fulfills or rejects !!!</li>
+          </ul>
         </section>
         <section>
           <section>
             <h2>Async/await</h2>
-            <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
+            <ul class="no-bullet">
+              <li class="fragment">Async control flow ... in a sequential way !!! Awesome !!!</li>
+            </ul>
           </section>
           <section>
             <iframe
@@ -759,29 +738,34 @@
         </section>
         <section>
           <h2>TL;DR</h2>
-          <h3>Previous limitations</h3>
-          <p class="fragment">Code boilerplate</p>
-          <p class="fragment">Error management</p>
-          <p class="fragment">No reference to intermediate steps</p>
-
+          <h3>Previous limitations:</h3>
+          <ul class="no-bullet">
+            <li class="fragment">Code boilerplate</li>
+            <li class="fragment">Error management</li>
+            <li class="fragment">No reference to intermediate steps</li>
+          </ul>
+        </section>
+        <section>
           <h3>Still:</h3>
-          <p class="fragment">Single value parameter</p>
-          <p class="fragment">Only single resolution</p>
-          <p class="fragment">Cannot be canceled</p>
-          <p class="fragment">
-            Less performant (but more error-proof) => achieve the same with
-            callbacks ?
-          </p>
+          <ul class="no-bullet">
+            <li class="fragment">Single value parameter</li>
+            <li class="fragment">Only single resolution</li>
+            <li class="fragment">Cannot be canceled</li>
+            <li class="fragment">Less performant (but more error-proof) => achieve the same with
+            callbacks ?</li>
+          </ul>
         </section>
         <section>
           <h2>Sources</h2>
-          https://nodejs.org/en/docs/guides/dont-block-the-event-loop/
-          https://blog.hellojs.org/asynchronous-javascript-from-callback-hell-to-async-and-await-9b9ceb63c8e8
-          https://scotch.io/courses/10-need-to-know-javascript-concepts/callbacks-promises-and-async
-          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators
-          https://codeburst.io/understanding-generators-in-es6-javascript-with-examples-6728834016d5
-          https://medium.com/@benlesh/rxjs-observable-interop-with-promises-and-async-await-bebb05306875
-          https://www.academind.com/learn/javascript/callbacks-vs-promises-vs-rxjs-vs-async-awaits/
+          <ul class="no-bullet">
+            <li class="fragment">https://nodejs.org/en/docs/guides/dont-block-the-event-loop/</li>
+            <li class="fragment">https://blog.hellojs.org/asynchronous-javascript-from-callback-hell-to-async-and-await-9b9ceb63c8e8</li>
+            <li class="fragment">https://scotch.io/courses/10-need-to-know-javascript-concepts/callbacks-promises-and-async</li>
+            <li class="fragment">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators</li>
+            <li class="fragment">https://codeburst.io/understanding-generators-in-es6-javascript-with-examples-6728834016d5</li>
+            <li class="fragment">https://medium.com/@benlesh/rxjs-observable-interop-with-promises-and-async-await-bebb05306875</li>
+            <li class="fragment">https://www.academind.com/learn/javascript/callbacks-vs-promises-vs-rxjs-vs-async-awaits/</li>
+          </ul>
         </section>
 
         <section id="playground">
