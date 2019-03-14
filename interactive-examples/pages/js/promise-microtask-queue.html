@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>JavaScript Runner: Callbacks execution order #1</title>
+    <title>JavaScript Runner: Promise & microtask queue</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../css/codemirror-5-31-0.css" rel="stylesheet" />
     <link href="../../css/editor-js.css" rel="stylesheet" />
@@ -13,16 +13,13 @@
   <body>
       <section id="static">
           <pre>
-<code id="static-js">const asyncExec = (callback) => setTimeout(callback, 0);
+<code id="static-js">console.log('A');
 
-console.log('A');
-asyncExec(function() {
-  console.log('C');
-  asyncExec(function() {
-    console.log('E');
-  })
-  console.log('D');
-});
+setTimeout(() => console.log('D'), 0);
+
+Promise.resolve('C')
+.then( (data) => console.log(data) );
+
 console.log('B');
 </code>
 </pre>
@@ -30,7 +27,7 @@ console.log('B');
       </section>
 
       <section id="live" class="live hidden">
-          <header><h4>JavaScript Runner: Callbacks execution order #1</h4></header>
+          <header><h4>JavaScript Runner: Promise & microtask queue</h4></header>
           <div id="editor" class="editor"></div>
 
           <div class="output-container">

@@ -199,6 +199,13 @@
               });
             </code></pre>
           </section>
+          <section id="callback-api-example">
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/callback-api-example.html"
+            ></iframe>
+            <a href="#/promise-api-example">Promises</a>
+          </section>
           <section>
             <iframe
               class="stretch"
@@ -370,107 +377,188 @@
           </section>
         </section>
         <section>
-          <h3>Immutable once resolved</h3>
-          <p>Once resolved, a promise is immutable</p>
+          <section>
+            <h3>Immutable once resolved</h3>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-immutable-1.html"
+            ></iframe>
+          </section>
+          <section>
+            <h3>Immutable once resolved</h3>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-immutable-2.html"
+            ></iframe>
+          </section>
         </section>
         <section>
-          <h3>Thenable duck typing</h3>
-          <p>
-            Any object or function that has a <code>then</code> method on it
-          </p>
+          <section>
+            <h3>Thenable duck typing</h3>
+            <p>
+              Any object or function that has a <code>then</code> method on it
+            </p>
+            <aside class="notes">
+              Legacy stuff with packages having already declare
+              <code>then</code> methods...
+            </aside>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-thenable.html"
+            ></iframe>
+          </section>
         </section>
         <section>
-          <h3>Promise & job queue</h3>
-          <p>
-            When calling then, the callback will always be called asynchronously
-          </p>
-          <p>Higher priority than callbacks</p>
-          <aside>
-            https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
-          </aside>
+          <section>
+            <h3>Promisifying an async function</h3>
+            <pre><code class="hljs" data-trim>
+              // async(data, successCallback, errorCallback) function
+              function asyncPromisified(data) {
+                return new Promise(function(resolve, reject) {
+                  async(data, resolve, reject);
+                });
+              }
+            </code></pre>
+          </section>
+          <section>
+            <h3>Promisifying an async function</h3>
+            <pre><code class="hljs" data-trim>
+              // async(data, callback) "error-first" style
+              function asyncPromisified(data) {
+                return new Promise(function(resolve, reject) {
+                  async(data, function(err,data) {
+                    err ? reject(err) : resolve(data);
+                  });
+                });
+              }
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Promise & job queue</h3>
+            <p class="fragment">
+              When calling then, the callback will always be called
+              asynchronously
+            </p>
+            <p class="fragment">Higher priority than event queue</p>
+            <aside class="notes">
+              https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/
+            </aside>
+          </section>
+          <section>
+            <h3>Promise microtask queue</h3>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-microtask-queue.html"
+            ></iframe>
+          </section>
         </section>
         <section>
           <h3>Promise trust</h3>
           <h4>Call the callback too early</h4>
-          <p>What happens if a promise is immediately fulfilled ?</p>
-          <p>
+          <p class="fragment">
+            What happens if a promise is immediately fulfilled ?
+          </p>
+          <p class="fragment">
             In any cases, the then callback will be executed asynchronously
             through the microtask queue
           </p>
-          <p>
+          <p class="fragment">
             Promise resolve synchronous & asynchronous code the same predictable
             way
           </p>
         </section>
         <section>
-          <h3>Promise trust</h3>
           <h4>Call the callback too late</h4>
-          <p>
-            When a promise is fulfilled, every then callback registered will be
-            called in order in the next microtask queue execution
+          <p class="fragment">
+            When a promise is fulfilled, every <code>then</code> callback
+            registered will be called in order in the next microtask queue
+            execution
           </p>
         </section>
         <section>
-          <h3>Promise trust</h3>
           <h4>Callback never called</h4>
-          <p>If a promise is resolved, wether it is fulfilled or not</p>
-          <p>Promise.race</p>
+          <p class="fragment">
+            If a promise is resolved, its <code>then</code> callbacks will be
+            called wether it is fulfilled or not
+          </p>
+          <p class="fragment">Promise.race</p>
         </section>
         <section>
-          <h3>Promise trust</h3>
           <h4>Callback called too few or too many times</h4>
-          <p>A promise only resolves once, after it stays immutable</p>
-          <p>Then registered callbacks will only be executed once</p>
+          <p class="fragment">
+            A promise only resolves once, after it stays immutable
+          </p>
+          <p class="fragment">
+            Then registered callbacks will only be executed once
+          </p>
         </section>
         <section>
-          <h3>Promise trust</h3>
-          <h4>Parameters issues</h4>
-          <p>No parameters: resolves with <code>undefined</code></p>
-          <p>More than one paramter: subsequent ones are ignored</p>
+          <section>
+            <h4>Parameters issues</h4>
+            <p class="fragment">
+              No parameters: resolves with <code>undefined</code>
+            </p>
+            <p class="fragment">
+              More than one parameter: subsequent ones are ignored
+            </p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-parameters.html"
+            ></iframe>
+          </section>
         </section>
         <section>
-          <h3>Promise trust</h3>
           <h4>Trustable ?</h4>
-          <p>Promise.resolve</p>
-          <p>
+          <p class="fragment">Promise.resolve</p>
+          <p class="fragment">
             If pass a non-thenable value, it returns a new genuine promise
             fulfilled with that value
           </p>
-          <p>If pass a genuine promise value, it returns it back</p>
-          <p>
+          <p class="fragment">
+            If pass a genuine promise value, it returns it back
+          </p>
+          <p class="fragment">
             If pass a non-genuine promise value, it unwraps that value up to its
             final non-thenable value
           </p>
-          <p>Promise.resolve always return a trustable genuine promise value</p>
-          <aside>
-            Functions that return both asynchronous & synchronous values
-          </aside>
-        </section>
-        <section>
-          <h3>Promise trust</h3>
-          <h4>Chain flow</h4>
-          <p>
-            The value returned from a fulfillment callback is automatically set
-            as the fulfillment of the next chained promise
+          <p class="fragment">
+            Promise.resolve always return a trustable genuine promise value
           </p>
         </section>
         <section>
-          <h3>Promise advanced</h3>
-          <h4>Default handles</h4>
-          <p>fulfillment</p>
-          <pre><code class="hljs" data-trim>
-            function(v) {
-              return v;
-            }
-          </code></pre>
+          <section>
+            <h4>Chain flow</h4>
+            <p class="fragment">
+              The value returned from a fulfillment callback is automatically
+              set as the fulfillment of the next chained promise
+            </p>
+          </section>
+          <section id="promise-api-example">
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-api-example.html"
+            ></iframe>
+            <a href="#/callback-api-example">Callbacks</a>
+          </section>
         </section>
         <section>
           <h3>Promise advanced</h3>
-          <h4>Default handles</h4>
-          <p>Rejection</p>
+          <p class="fragment">Default handlers</p>
           <pre><code class="hljs" data-trim>
+            // Success handler
+            function(v) {
+              return v;
+            }
+
+            // Error handler
             function(err) {
-              throw err;
+            throw err;
             }
           </code></pre>
         </section>

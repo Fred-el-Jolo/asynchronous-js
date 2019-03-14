@@ -13,18 +13,18 @@
   <body>
       <section id="static">
           <pre>
-<code id="static-js">
-const p = new Promise(resolve, reject) {
+<code id="static-js">const p = new Promise(function(resolve, reject) {
   resolve(42);
-  resolve("Yep");
+  resolve('Yep');
   resolve(21);
-};
+  reject('Will this reject the promise ?');
+});
 
 p.then(function(data) {
-  console.error(`Fulfilled with ${data}`);
+  console.log(`Fulfilled with ${data}`);
 }, function(err) {
 console.error(`Error ${err}`);
-})
+});
 </code>
 </pre>
 
