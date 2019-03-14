@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>JavaScript Runner: Callbacks API example</title>
+    <title>JavaScript Runner: Async/await API error</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="../../css/codemirror-5-31-0.css" rel="stylesheet" />
     <link href="../../css/editor-js.css" rel="stylesheet" />
@@ -16,29 +16,42 @@
 <code id="static-js">const asyncExec = (callback, data) => {
   setTimeout(() => callback(null, data), 0);
 };
+const asyncError = (callback, err) => {
+  setTimeout(() => callback(err, null), 0);
+};
 const api = {
   getUser: (login, callback) => asyncExec(callback, `Hi ${login}, you are logged in.`),
   getGeoLocation: (user, callback) => asyncExec(callback, `${user} You live in Nice.`),
-  getWeather: (location, callback) => asyncExec(callback, `${location} It is sunny.`),
+  getWeather: (location, callback) => asyncError(callback, `Oops something wrong with weather`),
   notifyWeather: (data, callback) => asyncExec(callback, `Notified: ${data}`),
 }
 
-api.getUser('fred', function(err, user) {
-  api.getGeoLocation(user, function(err, location) {
-      api.getWeather(location, function(err, weather) {
-          api.notifyWeather(weather, function(err, data) {
-            console.log(data);
-          });
-      });
-  });
-});
-</code>
+const promisify = (fn) => {return (data) => {return new Promise(function(resolve, reject) {setTimeout(() => {fn(data, function(err, data) {if (err) {reject(err)}resolve(data);})}, 0);});};};
+
+async function asyncFlow() {
+  try {
+    const user = await promisify(api.getUser)('fred');
+    const location = await promisify(api.getGeoLocation)(user);
+    const weather = await promisify(api.getWeather)(location);
+    const notifiedData = await promisify(api.notifyWeather)(weather);
+    
+    console.log(user);
+    console.log(location);
+    console.log(weather);
+    console.log(notifiedData);
+  }
+  catch(err) {
+    console.log(`Try/catch: ${err}`);
+  }
+}
+
+asyncFlow();</code>
 </pre>
 
       </section>
 
       <section id="live" class="live hidden">
-          <header><h4>JavaScript Runner: Callbacks API example</h4></header>
+          <header><h4>JavaScript Runner: Async/await API error</h4></header>
           <div id="editor" class="editor"></div>
 
           <div class="output-container">

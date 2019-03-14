@@ -270,6 +270,12 @@
               <li class="nested">Your own code cannot be trusted</li>
             </aside>
           </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/callback-api-error.html"
+            ></iframe>
+          </section>
         </section>
         <section>
           <section>
@@ -546,6 +552,12 @@
             ></iframe>
             <a href="#/callback-api-example">Callbacks</a>
           </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-api-error.html"
+            ></iframe>
+          </section>
         </section>
         <section>
           <h3>Promise advanced</h3>
@@ -728,8 +740,48 @@
           </p>
         </section>
         <section>
-          <h2>Async/await</h2>
-          <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
+          <section>
+            <h2>Async/await</h2>
+            <p>Async control flow ... in a sequential way !!! Awesome !!!</p>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/async-api-example.html"
+            ></iframe>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/async-api-error.html"
+            ></iframe>
+          </section>
+        </section>
+        <section>
+          <h2>TL;DR</h2>
+          <h3>Previous limitations</h3>
+          <p class="fragment">Code boilerplate</p>
+          <p class="fragment">Error management</p>
+          <p class="fragment">No reference to intermediate steps</p>
+
+          <h3>Still:</h3>
+          <p class="fragment">Single value parameter</p>
+          <p class="fragment">Only single resolution</p>
+          <p class="fragment">Cannot be canceled</p>
+          <p class="fragment">
+            Less performant (but more error-proof) => achieve the same with
+            callbacks ?
+          </p>
+        </section>
+        <section>
+          <h2>Sources</h2>
+          https://nodejs.org/en/docs/guides/dont-block-the-event-loop/
+          https://blog.hellojs.org/asynchronous-javascript-from-callback-hell-to-async-and-await-9b9ceb63c8e8
+          https://scotch.io/courses/10-need-to-know-javascript-concepts/callbacks-promises-and-async
+          https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Iterators_and_Generators
+          https://codeburst.io/understanding-generators-in-es6-javascript-with-examples-6728834016d5
+          https://medium.com/@benlesh/rxjs-observable-interop-with-promises-and-async-await-bebb05306875
+          https://www.academind.com/learn/javascript/callbacks-vs-promises-vs-rxjs-vs-async-awaits/
         </section>
 
         <section id="playground">

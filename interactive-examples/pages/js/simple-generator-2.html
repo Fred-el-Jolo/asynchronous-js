@@ -14,16 +14,15 @@
       <section id="static">
           <pre>
 <code id="static-js">function *foo() {
-var x = yield "Hello World";
-
-yield x;
+	var x = yield "Hello World";
+	yield x;
 }
 
-var it = foo();
+const it = foo();
 
-it.next().value;
-it.next().value;
-it.next(Hello JS Sophia).value;</code>
+console.log(it.next());
+console.log(it.next('Hello JS Sophia'));
+console.log(it.next('Hello JS Sophia'));</code>
 </pre>
 
       </section>
