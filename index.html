@@ -59,7 +59,7 @@
         </section>
 
         <section>
-          <h1>Asynchronous javascript through the ages</h1>
+          <h1>Asynchronous javascript, from hell to paradise</h1>
           <h3>JS Sophia - 14th March, 2019</h3>
           <p>
             <small>Created by <a href="">Fred Guillaume</a></small>
@@ -78,10 +78,10 @@
         </section>
         <section>
           <h2>Sync & async</h2>
-          <p>How do we think about</p>
-          <p>How do we read</p>
-          <p>How do we write</p>
-          <p>code ?</p>
+          <p class="fragment">How do we think about</p>
+          <p class="fragment">How do we read</p>
+          <p class="fragment">How do we write</p>
+          <p class="fragment">code ?</p>
           <aside class="notes"></aside>
         </section>
         <section>
@@ -91,131 +91,287 @@
         </section>
         <section>
           <p>Can't you multitask ? Because I can !!!</p>
-          <p>"Faking" multitasking</p>
-          <p>Lose focus</p>
-          <p>Quickly switching from one task to another</p>
+          <p class="fragment">"Faking" multitasking</p>
+          <p class="fragment">Lose focus</p>
+          <p class="fragment">Quickly switching from one task to another</p>
           <aside class="notes"></aside>
         </section>
         <section>
           <p>How do we work best ?</p>
-          <p>Do tasks one after the another</p>
-          <p>Our brain = event loop</p>
+          <p class="fragment">Do tasks one after the another</p>
+          <p class="fragment">Our brain = event loop</p>
           <aside class="notes"></aside>
-        </section>
-        <section class="draft">
-          <p>When we think</p>
-          <p>Why does it matters ?</p>
-          <p>Threads ?</p>
-          <p>Parallel = simultaneously</p>
-          <p>=> later, after an undefined amount of time</p>
-          <p>Race conditions only at function level</p>
-          <p>Event loop tasks are executed one by one</p>
         </section>
         <section>
           <h3>Event loop</h3>
-          <p>Single threaded</p>
-          <p>Run-to-completion</p>
-          <p>No parallel access</p>
-          <p>No shared memory</p>
+          <p class="fragment">Single threaded</p>
+          <p class="fragment">Run-to-completion</p>
+          <p class="fragment">No parallel access</p>
+          <p class="fragment">No shared memory</p>
         </section>
         <section>
-          <h3>Blocking the event loop</h3>
-          <p>A blocking thread will prevent any other threads from running</p>
-          <p>Blocks the whole stack</p>
-          <p>Use of asynchronous callbacks</p>
-          <section>TODO: blocked event loop</section>
+          <section>
+            <h3>Blocking the event loop</h3>
+            <p class="fragment">
+              A blocking thread will prevent any other threads from running
+            </p>
+            <p class="fragment">Blocks the whole stack</p>
+            <p class="fragment">Use of asynchronous callbacks</p>
+          </section>
+          <section>
+            <h2>Blocking the event loop</h2>
+            <pre><code class="hljs" data-trim>
+            const end = Date.now() + 5000;
+            while (Date.now() < end) {
+              // Expensive operation blocking the event loop
+            }
+            </code></pre>
+          </section>
         </section>
         <section>
-          <h2>Callbacks</h2>
-          <p>Call stack & callback queue</p>
-          <p>Avoid blocking the event loop</p>
-          <p>Execute code after an undefined (and unknown) amount of time</p>
-          <p>
-            Callbacks execution are deferred later by third party code:
-            inversion of control
-          </p>
-          <section>TODO: API calls</section>
+          <section>
+            <h3>Blocking the event loop</h3>
+            <p>Beware of expensive tasks</p>
+            <p class="fragment">
+              <code>JSON.Parse</code> & <code>JSON.stringify</code>
+            </p>
+            <p class="fragment">Regexp matching</p>
+            <p class="fragment">Think about computation time & complexity</p>
+          </section>
+          <section>
+            <h2>Expensive regexp</h2>
+            <pre><code class="hljs" data-trim>
+              app.get('/redos-me', (req, res) => {
+                let filePath = req.query.filePath;
+                
+                // Nested quantifier, can be expensive !!!
+                if (fileName.match(/(\/.+)+$/)) {
+                console.log('valid path');
+                }
+                else {
+                console.log('invalid path');
+                }
+                
+                res.sendStatus(200);
+              })
+            </code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Callbacks</h2>
+            <p class="fragment">Call stack & callback queue</p>
+            <p class="fragment">Avoid blocking the event loop</p>
+            <p class="fragment">
+              Execute code after an undefined (and unknown) amount of time
+            </p>
+            <p class="fragment">
+              Callbacks execution are deferred later by third party code:
+              inversion of control
+            </p>
+          </section>
           <aside class="notes">
+            Note: callbacks do not avoid blocking event loop
             https://www.youtube.com/watch?v=8aGhZQkoFbQ
             http://latentflip.com/loupe/
             https://flaviocopes.com/javascript-event-loop/#blocking-the-event-loop
           </aside>
         </section>
         <section>
-          <h2>Callback hell</h2>
-          <p>What is callback hell ?</p>
-          <ol>
-            <li>Code nesting</li>
-            <li>TODO: add sample</li>
-            <li>Execution order</li>
-            <li>TODO: add sample</li>
-            <li>Tighlty coupled callbacks</li>
-            <li>TODO: add sample</li>
-            <li>Complex even with simple workflows</li>
-            <li>What if executed too early, too late, never, too many times</li>
-            <li>Error management</li>
-            <li class="nested">Third party code cannot be trusted</li>
-            <li class="nested">Your own code cannot be trusted</li>
-          </ol>
-        </section>
-        <section>
-          <p>Some solutions exists</p>
-          <p>split callbacks</p>
-          <p>TODO: add sample</p>
-          <p>"error first" style</p>
-          <p>TODO: add sample</p>
-          <p>Not perfect</p>
-          <p class="nested">success and error at the same time</p>
-          <p class="nested">lot of extra code needed</p>
-          <aside>
-            <ul>
-              <li>error first => node style</li>
-            </ul>
-          </aside>
-        </section>
-        <section>
-          <h2>Promises</h2>
-          <p>Callback is execution is handle by external code => IoC</p>
-          <p>What if we could uninvert that inversion of control ?</p>
-          <p>
-            Callback mechanism: pass callback function to external code. The
-            callback will be called upon code completion
-          </p>
-          <p>
-            Instead, return an event-subscription capable object, with
-            "completion" and "failure" events
-          </p>
-          <p>Promise events</p>
-        </section>
-        <section>
-          <p>Promise allow flow control</p>
-          <p>
-            Function can be called when promise resolves, regardless if it is a
-            success or a failure
-          </p>
-          <pre><code class="hljs" data-trim>
-            function foo( promise ) {
-              if( supports3DTransforms ) {
-                promise.then(function() {
-                  // Code executed on promise fulfillment
-                },function() {
-                  // Code executed on promise failure
+          <section>
+            <h2>Callback hell</h2>
+            <p>What is callback hell ?</p>
+          </section>
+          <section>
+            <h2>Code nesting</h2>
+            <pre><code class="hljs" data-trim>
+              api.getUser(loggin, function(err, data) {
+                // ...
+                api.getGeoLocation(user, function(err, data) {
+                  // ...
+                  api.getWeather(location, function(err, data) {
+                    // ...
+                    api.notifyWeather(weather, function(err, data) {
+                      // ...
+                    });
+                  });
+                });
+              });
+            </code></pre>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/callback-exec-order-1.html"
+            ></iframe>
+          </section>
+          <section>
+            <iframe
+              class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/callback-exec-order-2.html"
+            ></iframe>
+            <p class="fragment">Complex even with simple workflows</p>
+          </section>
+          <section>
+            <h2>Tighlty coupled callbacks</h2>
+            <pre><code class="hljs" data-trim>
+              api.getUser(loggin, function(err, data) {
+                // ...
+                api.getGeoLocation(user, function(err, data) {
+                  // ...
+                  api.getWeather(location, function(err, data) {
+                    // ...
+                    api.notifyWeather(weather, function(err, data) {
+                      // ...
+                    });
+                  });
+                });
+              });
+            </code></pre>
+          </section>
+          <section>
+            <h2>Execution issues</h2>
+            <p class="fragment">Executed too early</p>
+            <p class="fragment">too late</p>
+            <p class="fragment">never</p>
+            <p class="fragment">too many times</p>
+            <p class="fragment">too few times</p>
+          </section>
+          <section>
+            <h2>Error management</h2>
+            <pre><code class="hljs" data-trim>
+              try{
+                api.getUser(loggin, function(err, data) {
+                  // ...
+                  api.getGeoLocation(user, function(err, data) {
+                    // ...
+                    api.getWeather(location, function(err, data) {
+                      // ...
+                      api.notifyWeather(weather, function(err, data) {
+                        // ...
+                      });
+                    });
+                  });
                 });
               }
-            }
+              catch(err) {
+                // Async errors not catched here !!!
+              }
             </code></pre>
+            <aside>
+              <li class="nested">Third party code cannot be trusted</li>
+              <li class="nested">Your own code cannot be trusted</li>
+            </aside>
+          </section>
         </section>
         <section>
-          <p>
-            Function can be called only when promise is fulfilled, or is
-            rejected
-          </p>
-          <pre><code class="hljs" data-trim>
-            promise.then(bar, errorBar);
+          <section>
+            <h3>Some solutions exists</h3>
+          </section>
+          <section>
+            <h3>split callbacks</h3>
+            <pre><code class="hljs" data-trim>
+              const successCallback = (data) => console.log(data);
+              const errorCallback = (error) => console.error(error);
+
+              async(source, successCallback, errorCallback);
+            </code></pre>
+          </section>
+          <section>
+            <h3>"Error first" style</h3>
+            <pre><code class="hljs" data-trim>
+                async(source, function(err, data) {
+                  // ...
+                });
+            </code></pre>
+          </section>
+          <section>
+            <h3>Still a lot to improve</h3>
+            <p class="fragment">success and error at the same time</p>
+            <p class="fragment">
+              lot of extra cumbersome code needed to fix all these issues
+            </p>
+            <aside class="notes">
+              <ul>
+                <li>error first => node style</li>
+              </ul>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h2>Promises</h2>
+            <p class="fragment">
+              Callback is execution is handle by external code => IoC
+            </p>
+            <p class="fragment">
+              What if we could uninvert that inversion of control ?
+            </p>
+          </section>
+          <section>
+            <h3 class="fragment">Promise "events"</h3>
+
+            <pre><code class="hljs" data-trim>
+              function foo(x) {
+                // start doing something that could take a while
+
+                // make a `listener` event notification
+                // capability to return
+
+                return listener;
+              }
+
+              var evt = foo( 42 );
+
+              evt.on( "completion", function(){
+                // now we can do the next step!
+              } );
+
+              evt.on( "failure", function(err){
+                // oops, something went wrong in `foo(..)`
+              } );
+            </code></pre>
+            <aside class="notes">
+              Instead of passing a callback to async function, get a listener
+              that will trigger when the function has finished
+              <p>
+                Instead, return an event-subscription capable object, with
+                "completion" and "failure" events
+              </p>
+            </aside>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h3>Flow control</h3>
+            <p>
+              Function can be called when promise resolves, regardless if it is
+              a success or a failure
+            </p>
+            <pre><code class="hljs" data-trim>
+            function foo(promise) {
+              promise.then(function() {
+                // Code executed on promise fulfillment
+              },function() {
+                // Code executed on promise failure
+              });
+            }
           </code></pre>
+          </section>
+          <section>
+            <h3>Flow control</h3>
+            <p>
+              Function can be called only when promise is fulfilled, or is
+              rejected
+            </p>
+            <pre><code class="hljs" data-trim>
+              promise.then(bar, errorBar);
+            </code></pre>
+          </section>
         </section>
         <section>
-          <p>Once fulfilled, a promise is immutable</p>
+          <h3>Immutable once resolved</h3>
+          <p>Once resolved, a promise is immutable</p>
         </section>
         <section>
           <h3>Thenable duck typing</h3>
