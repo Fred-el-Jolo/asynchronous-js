@@ -28,22 +28,28 @@
   </head>
   <body>
     <div class="reveal">
+      <!-- In between the <div="reveal"> and the <div class="slides">-->
+      <header
+        style="position: absolute;top: 50px; left: 100px; z-index:500; font-size:20px;">
+      </header>
+      <!-- In between the <div="reveal"> and the <div class="slides">-->
       <div class="slides">
         <section>
-          <h1>Asynchronous javascript, from hell to paradise</h1>
-          <h3>JS Sophia - 14th March, 2019</h3>
+          <h3>Asynchronous javascript, from hell to exquisiteness</h3>
+          <p>JS Sophia - 14th March, 2019</p>
           <p>
-            <small>Created by <a href="">Fred Guillaume</a></small>
+            <small>By <a href="https://twitter.com/fredGuillaume">Fred Guillaume</a></small>
           </p>
+          <img src="/images/spinningwheel.gif" alt="">
         </section>
         <section>
           <h2>Agenda</h2>
           <ol>
-            <li>Sync vs Async</li>
-            <li>Callbacks</li>
-            <li>Promises</li>
-            <li>Generators</li>
-            <li>Await/async</li>
+            <li class="fragment">Sync vs Async</li>
+            <li class="fragment">Callbacks</li>
+            <li class="fragment">Promises</li>
+            <li class="fragment">Generators</li>
+            <li class="fragment">Await/async</li>
           </ol>
           <aside class="notes"></aside>
         </section>
@@ -55,6 +61,8 @@
             <li class="fragment">How do we write</li>
             <li class="fragment">code ?</li>
           </ul>
+          <br>
+          <img  src="/images/think_twice_code_once.png" alt="">
           <aside class="notes"></aside>
         </section>
         <section>
@@ -63,18 +71,13 @@
             <li class="fragment">
               High level thinking is synchronous, single tasked
             </li>
-          </ul>
-          <p></p>
-          <aside class="notes"></aside>
-        </section>
-        <section>
-          <h3>Our brain is synchronous</h3>
-          <ul class="no-bullet">
             <li class="fragment">Can't you multitask ? Because I can !!!</li>
             <li class="fragment">"Faking" multitasking</li>
             <li class="fragment">Lose focus</li>
             <li class="fragment">Quickly switching from one task to another</li>
           </ul>
+          <br>
+          <img src="/images/science-behind-multitasking.png" alt="" height="250">
           <aside class="notes"></aside>
         </section>
         <section>
@@ -84,16 +87,36 @@
             <li class="fragment">Do tasks one after the another</li>
             <li class="fragment">Our brain = event loop</li>
           </ul>
+          <br>
+          <img src="/images/todolist.png" alt="">
           <aside class="notes"></aside>
         </section>
         <section>
-          <h3>Event loop</h3>
-          <ul class="no-bullet">
-            <li class="fragment">Single threaded</li>
-            <li class="fragment">Run-to-completion</li>
-            <li class="fragment">No parallel access</li>
-            <li class="fragment">No shared memory</li>
-          </ul>
+          <section>
+            <h3>Event loop</h3>
+            <ul class="no-bullet">
+              <li class="fragment">Single threaded</li>
+              <li class="fragment">Run-to-completion</li>
+              <li class="fragment">No parallel access</li>
+              <li class="fragment">No shared memory</li>
+            </ul>
+            <br>
+            <img src="/images/event-loop.jpg" alt="">
+          </section>
+          <section>
+            <h3>Event loop</h3>
+            <img src="/images/event-loop-details.png" alt="" class="stretch">
+            <a href="http://latentflip.com/loupe/">http://latentflip.com/loupe/</a>
+          </section>
+          <aside class="notes">
+            <ul>
+              <li>FIFO</li>
+              <li>Stack where functions lies</li>
+              <li>Heap where objects are allocated</li>
+              <li>Queue where new "messages" are stored before execution</li>
+              <li>Queue messages will be processed when the stack is empty</li>
+            </ul>
+          </aside>
         </section>
         <section>
           <section>
@@ -105,6 +128,8 @@
               <li class="fragment">Blocks the whole stack</li>
               <li class="fragment">Use of asynchronous callbacks</li>
             </ul>
+            <br>
+            <img src="/images/hand-stop-sign.jpg" alt="" height="150">
           </section>
           <section>
             <h3>Blocking the event loop</h3>
@@ -163,6 +188,8 @@
                 inversion of control
               </li>
             </ul>
+            <br>
+            <img src="/images/70173_Traditional_Boomerang.jpg" alt="" height="300">
           </section>
           <aside class="notes">
             Note: callbacks do not avoid blocking event loop
@@ -200,7 +227,6 @@
               class="stretch"
               data-src="http://localhost:8000/interactive-examples/pages/js/callback-api-example.html"
             ></iframe>
-            <a href="#/promise-api-example">Promises</a>
           </section>
           <section>
             <iframe
@@ -240,9 +266,11 @@
               <li class="fragment">Callback executed too early...</li>
               <li class="fragment">... or too late</li>
               <li class="fragment">Maybe never?</li>
-              <li class="fragment">Whate about too many times ?</li>
+              <li class="fragment">What about too many times ?</li>
               <li class="fragment">The only missing is too few times !!!!!</li>
             </ul>
+            <br>
+            <img src="/images/wtf.gif" alt="" class="fragment">
           </section>
           <section>
             <h4>Error management</h4>
@@ -265,7 +293,7 @@
                 // Async errors not catched here !!!
               }
             </code></pre>
-            <aside>
+            <aside class="notes">
               <ul>
                 <li>Third party code cannot be trusted</li>
                 <li>Your own code cannot be trusted</li>
@@ -304,8 +332,10 @@
             <h3>Still a lot to improve</h3>
             <ul class="no-bullet">
               <li class="fragment">success and error at the same time</li>
-              <li class="fragment"Lot of extra cumbersome code needed to fix all these issues</li>
+              <li class="fragment">Lot of cumbersome code needed to fix all these issues</li>
             </ul>
+            <br>
+            <img src="/images/desperate.jpeg" alt="" class="fragment">
             <aside class="notes">
               <ul>
                 <li>error first => node style</li>
@@ -317,9 +347,11 @@
           <section>
             <h2>Promises</h2>
             <ul class="no-bullet">
-              <li class="fragment">Callback is execution is handle by external code => IoC</li>
+              <li class="fragment">Callback execution is handled by external code => IoC</li>
               <li class="fragment">What if we could uninvert that inversion of control ?</li>
             </ul>
+            <br>
+            <img src="/images/hein.png" alt="" class="fragment">
           </section>
           <section>
             <h3>Promise "events"</h3>
@@ -360,7 +392,7 @@
               <li class="fragment">Function can be called when promise resolves, regardless if it is
               a success or a failure</li>
             </ul>
-            <pre><code class="hljs" data-trim>
+            <pre class="fragment"><code class="hljs" data-trim>
             function foo(promise) {
               promise.then(function() {
                 // Code executed on promise fulfillment
@@ -376,7 +408,7 @@
               <li class="fragment">Function can be called only when promise is fulfilled, or is
               rejected</li>
             </ul>
-            <pre><code class="hljs" data-trim>
+            <pre class="fragment"><code class="hljs" data-trim>
               promise.then(bar, errorBar);
             </code></pre>
           </section>
@@ -403,6 +435,8 @@
             <ul class="no-bullet">
               <li class="fragment">Any object or function that has a <code>then</code> method on it</li>
             </ul>
+            <br>
+            <img src="/images/duck-typing.jpeg" alt="">
             <aside class="notes">
               <ul>
                 <li>Legacy stuff with packages having already declare
@@ -473,6 +507,8 @@
             <li class="fragment">Promise resolve synchronous & asynchronous code the same predictable
             way</li>
           </ul>
+          <br>
+          <img src="/images/Passed.jpg" alt="" class="fragment"  height="150">
         </section>
         <section>
           <h4>Call the callback too late</h4>
@@ -481,6 +517,8 @@
             registered will be called in order in the next microtask queue
             execution</li>
           </ul>
+          <br>
+          <img src="/images/Passed.jpg" alt="" class="fragment" height="150">
         </section>
         <section>
           <h4>Callback never called</h4>
@@ -489,6 +527,8 @@
             called wether it is fulfilled or not</li>
             <li class="fragment">Promise.race</li>
           </ul>
+          <br>
+          <img src="/images/Passed.jpg" alt="" class="fragment" height="150">
         </section>
         <section>
           <h4>Callback called too few or too many times</h4>
@@ -496,6 +536,8 @@
             <li class="fragment">A promise only resolves once, after it stays immutable</li>
             <li class="fragment">Then registered callbacks will only be executed once</li>
           </ul>
+          <br>
+          <img src="/images/passed-failed.jpeg" alt="" class="fragment">
         </section>
         <section>
           <section>
@@ -504,6 +546,8 @@
               <li class="fragment">No parameters: resolves with <code>undefined</code></li>
               <li class="fragment">More than one parameter: subsequent ones are ignored</li>
             </ul>
+            <br>
+            <img src="/images/params.jpeg" alt="">
           </section>
           <section>
             <iframe
@@ -524,6 +568,8 @@
             </p></li>
             <li class="fragment">Promise.resolve always return a trustable genuine promise value</li>
           </ul>
+          <br>
+          <img src="/images/trust.jpeg" alt="" height="125">
         </section>
         <section>
           <section>
@@ -548,36 +594,34 @@
           </section>
         </section>
         <section>
-          <h3>Promise advanced</h3>
-          <ul class="no-bullet">
-            <li class="fragment">Default handlers</li>
-          </ul>
-          <pre><code class="hljs" data-trim>
-            // Success handler
-            function(v) {
-              return v;
-            }
-
-            // Error handler
-            function(err) {
-            throw err;
-            }
-          </code></pre>
-        </section>
-        <section>
           <section>
             <h3>Promise advanced</h3>
             <ul class="no-bullet">
-              <li class="fragment">Fulfill handler unwrap promise value</li>
-              <li class="fragment">Error handler does not unwrap promise value</li>
+              <li class="fragment">Default handlers</li>
             </ul>
+            <pre><code class="hljs" data-trim>
+              // Success handler
+              function(v) {
+                return v;
+              }
+  
+              // Error handler
+              function(err) {
+              throw err;
+              }
+            </code></pre>
           </section>
           <section>
-            <iframe
-              class="stretch"
-              data-src="http://localhost:8000/interactive-examples/pages/js/promise-default-handlers.html"
-            ></iframe>
+            <iframe class="stretch"
+              data-src="http://localhost:8000/interactive-examples/pages/js/promise-default-handlers.html"></iframe>
           </section>
+        </section>
+        <section>
+          <h3>Promise advanced</h3>
+          <ul class="no-bullet">
+            <li class="fragment">Fulfill handler unwrap promise value</li>
+            <li class="fragment">Error handler does not unwrap promise value</li>
+          </ul>
         </section>
         <section>
           <section>
@@ -590,6 +634,8 @@
               <li class="fragment">Errors in that catch, what about the promise returned by the catch
               method ?</li>
             </ul>
+            <br>
+            <img src="/images/chamallow.jpeg" alt="">
           </section>
           <section>
             <iframe
@@ -601,7 +647,7 @@
         <section>
           <h3>Promise patterns</h3>
           <ul class="no-bullet">
-            <li class="fragment">Promise.all([])</li>
+            <li class="fragment"><code>Promise.all([])</code></li>
             <li class="fragment">Fulfilled if every promise are fulfilled. If one is rejected,
             Promise.all is immediately rejected</li>
             <li class="fragment">An array of every fulfillment messages is passed to the then fulfill
@@ -614,7 +660,7 @@
         <section>
           <h3>Promise patterns</h3>
           <ul class="no-bullet">
-            <li class="fragment">Promise.race([])</li>
+            <li class="fragment"><code>Promise.race([])</code></li>
             <li class="fragment">Argument: array of promise instances</li>
             <li class="fragment">Fulfilled when any promise fulfill, and rejected when any promise
             reject</li>
@@ -658,6 +704,8 @@
               </ul>
             </li>
           </ul>
+          <br>
+          <img src="/images/generator.jpeg" alt="">
           <aside class="notes">
             value = next value in sequence done = true if last value already be
             consumed
@@ -691,6 +739,7 @@
         </section>
         <section>
           <section>
+            <h3>Generators</h3>
             <ul class="no-bullet">
               <li class="fragment">Multiple iterators</li>
               <li class="fragment">Interleaving</li>
@@ -710,11 +759,14 @@
           </section>
         </section>
         <section>
+          <h3>Generators</h3>
           <ul class="no-bullet">
             <li class="fragment">What if we yield a promise ?</li>
             <li class="fragment">Pause the generator by getting back a promise, and resume it when
             that promise fulfills or rejects !!!</li>
           </ul>
+          <br>
+          <img src="/images/ampoule.png" alt="" class="fragment">
         </section>
         <section>
           <section>
@@ -722,6 +774,9 @@
             <ul class="no-bullet">
               <li class="fragment">Async control flow ... in a sequential way !!! Awesome !!!</li>
             </ul>
+            <img src="/images/ampoule.png" alt="" class="fragment">
+            <img src="/images/ampoule.png" alt="" class="fragment">
+            <img src="/images/ampoule.png" alt="" class="fragment">
           </section>
           <section>
             <iframe
@@ -756,6 +811,21 @@
           </ul>
         </section>
         <section>
+          <h3>To be continued:</h3>
+          <ul class="no-bullet">
+            <li class="fragment">Observables</li>
+            <li class="fragment">Multiple events (data streams)</li>
+            <li class="fragment">Cancelable</li>
+            <li class="fragment">Useful operators</li>
+            <li class="fragment">RxJS</li>
+          </ul>
+          <br>
+          <img src="/images/Rx_Logo_S.png" alt="" class="fragment">
+        </section>
+        <section>
+          <h2>Questions ?</h2>
+        </section>
+        <!--section>
           <h2>Sources</h2>
           <ul class="no-bullet">
             <li class="fragment">https://nodejs.org/en/docs/guides/dont-block-the-event-loop/</li>
@@ -766,7 +836,7 @@
             <li class="fragment">https://medium.com/@benlesh/rxjs-observable-interop-with-promises-and-async-await-bebb05306875</li>
             <li class="fragment">https://www.academind.com/learn/javascript/callbacks-vs-promises-vs-rxjs-vs-async-awaits/</li>
           </ul>
-        </section>
+        </section-->
 
         <section id="playground">
           <h2>Playground</h2>
@@ -774,38 +844,6 @@
             class="stretch"
             data-src="http://localhost:8000/interactive-examples/pages/js/playground.html"
           ></iframe>
-        </section>
-
-        <section>
-          <h2>Pretty Code</h2>
-          <pre><code class="hljs" data-trim data-noescape>
-            <mark class="hljs-custom-blur-code">function linkify( selector ) {
-              if( supports3DTransforms ) {
-
-                var nodes = document.querySelectorAll( selector );
-
-                for( var i = 0, len = nodes.length; i &lt; len; i++ ) {</mark>
-                  var node = nodes[i];
-
-                  if( !node.className ) {
-                    node.className += ' roll';
-                  }
-                <mark class="hljs-custom-blur-code">}
-              }
-            }</mark>
-					</code></pre>
-          <p>
-            Code syntax highlighting courtesy of
-            <a href="http://softwaremaniacs.org/soft/highlight/en/description/"
-              >highlight.js</a
-            >.
-          </p>
-        </section>
-        <section>
-          const asyncCallback = (success, error) => { const callback =
-          Math.random() > .5 ? success : error; setTimeout(callback, 0,
-          'Fredddy'); } asyncCallback((name)=>{ console.log(name); }, (name)=>{
-          console.log('error'); })
         </section>
       </div>
     </div>
