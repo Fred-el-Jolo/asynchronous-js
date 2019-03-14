@@ -9,7 +9,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  font: 16px/1.5 sans-serif;
+  font: 20px/1.5 sans-serif;
 }
 header h4:before {
   display: inline-block;
@@ -93,7 +93,7 @@ header h4 {
 }
 .editor,
 .output {
-  font-size: 16px;
+  font-size: 20px;
 }
 .editor {
   position: relative;
@@ -131,7 +131,7 @@ header h4 {
   padding: 0.5em;
   border: 2px solid #333;
   width: 100px;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
 }
