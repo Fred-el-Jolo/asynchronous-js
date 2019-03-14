@@ -2082,3 +2082,9 @@ ul.no-bullet {
 ul.no-bullet > li {
   list-style-type: none;
 }
+
+img.spinner-fred {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
