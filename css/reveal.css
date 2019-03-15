@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
  * reveal.js
  * http://revealjs.com
@@ -1603,10 +1604,17 @@ body {
 /*********************************************
  * CUSTOM STYLES
  *********************************************/
-ul.no-bullet {
-  margin-left: 0; }
-  ul.no-bullet li {
-    list-style-type: none; }
+.reveal ul.small-bullet {
+  padding-left: 0;
+  list-style: none; }
+  .reveal ul.small-bullet li {
+    padding-left: 1em;
+    position: relative; }
+    .reveal ul.small-bullet li::before {
+      color: white;
+      content: "•";
+      position: absolute;
+      left: 0; }
 
 img.spinner-fred {
   background: transparent !important;

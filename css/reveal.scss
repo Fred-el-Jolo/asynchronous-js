@@ -1913,10 +1913,20 @@ $controlsArrowAngleActive: 36deg;
 /*********************************************
  * CUSTOM STYLES
  *********************************************/
-ul.no-bullet {
-  margin-left: 0;
+.reveal ul.small-bullet {
+  padding-left: 0;
+  list-style: none;
+
   & li {
-    list-style-type: none;
+    padding-left: 1em;
+    position: relative;
+
+    &::before {
+      color: white;
+      content: "•";
+      position: absolute;
+      left: 0;
+    }
   }
 }
 

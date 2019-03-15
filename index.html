@@ -55,7 +55,7 @@
         </section>
         <section>
           <h2>Sync & async</h2>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">How do we think about</li>
             <li class="fragment">How do we read</li>
             <li class="fragment">How do we write</li>
@@ -67,7 +67,7 @@
         </section>
         <section>
           <h3>Our brain is synchronous</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">
               High level thinking is synchronous, single tasked
             </li>
@@ -82,7 +82,7 @@
         </section>
         <section>
           <h3>Our brain is synchronous</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">How do we work best ?</li>
             <li class="fragment">Do tasks one after the another</li>
             <li class="fragment">Our brain = event loop</li>
@@ -94,7 +94,7 @@
         <section>
           <section>
             <h3>Event loop</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Single threaded</li>
               <li class="fragment">Run-to-completion</li>
               <li class="fragment">No parallel access</li>
@@ -121,7 +121,7 @@
         <section>
           <section>
             <h3>Blocking the event loop</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">
                 A blocking thread will prevent any other threads from running
               </li>
@@ -144,7 +144,7 @@
         <section>
           <section>
             <h3>Blocking the event loop</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Beware of expensive tasks</li>
               <li class="fragment">
                 <code>JSON.Parse</code> & <code>JSON.stringify</code>
@@ -177,7 +177,7 @@
         <section>
           <section>
             <h2>Callbacks</h2>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Call stack & callback queue</li>
               <li class="fragment">Avoid blocking the event loop</li>
               <li class="fragment">
@@ -201,7 +201,7 @@
         <section>
           <section>
             <h3>Callback hell</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">What is callback hell ?</li>
             </ul>
           </section>
@@ -239,7 +239,7 @@
               class="stretch"
               data-src="http://localhost:8000/interactive-examples/pages/js/callback-exec-order-2.html"
             ></iframe>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Complex even with simple workflows</li>
             </ul>
           </section>
@@ -262,7 +262,7 @@
           </section>
           <section>
             <h4>Execution issues</h4>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Callback executed too early...</li>
               <li class="fragment">... or too late</li>
               <li class="fragment">Maybe never?</li>
@@ -330,7 +330,7 @@
           </section>
           <section>
             <h3>Still a lot to improve</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">success and error at the same time</li>
               <li class="fragment">Lot of cumbersome code needed to fix all these issues</li>
             </ul>
@@ -346,7 +346,7 @@
         <section>
           <section>
             <h2>Promises</h2>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Callback execution is handled by external code => IoC</li>
               <li class="fragment">What if we could uninvert that inversion of control ?</li>
             </ul>
@@ -388,7 +388,7 @@
         <section>
           <section>
             <h3>Flow control</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Function can be called when promise resolves, regardless if it is
               a success or a failure</li>
             </ul>
@@ -404,7 +404,7 @@
           </section>
           <section>
             <h3>Flow control</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Function can be called only when promise is fulfilled, or is
               rejected</li>
             </ul>
@@ -432,7 +432,7 @@
         <section>
           <section>
             <h3>Thenable duck typing</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Any object or function that has a <code>then</code> method on it</li>
             </ul>
             <br>
@@ -480,7 +480,7 @@
         <section>
           <section>
             <h3>Promise & job queue</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">When calling then, the callback will always be called
               asynchronously</li>
               <li class="fragment">Higher priority than event queue</li>
@@ -500,7 +500,7 @@
         <section>
           <h3>Promise trust</h3>
           <h4>Call the callback too early</h4>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">What happens if a promise is immediately fulfilled ?</li>
             <li class="fragment">In any cases, the then callback will be executed asynchronously
             through the microtask queue</li>
@@ -512,7 +512,7 @@
         </section>
         <section>
           <h4>Call the callback too late</h4>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">When a promise is fulfilled, every <code>then</code> callback
             registered will be called in order in the next microtask queue
             execution</li>
@@ -522,7 +522,7 @@
         </section>
         <section>
           <h4>Callback never called</h4>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">If a promise is resolved, its <code>then</code> callbacks will be
             called wether it is fulfilled or not</li>
             <li class="fragment">Promise.race</li>
@@ -532,7 +532,7 @@
         </section>
         <section>
           <h4>Callback called too few or too many times</h4>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">A promise only resolves once, after it stays immutable</li>
             <li class="fragment">Then registered callbacks will only be executed once</li>
           </ul>
@@ -542,7 +542,7 @@
         <section>
           <section>
             <h4>Parameters issues</h4>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">No parameters: resolves with <code>undefined</code></li>
               <li class="fragment">More than one parameter: subsequent ones are ignored</li>
             </ul>
@@ -558,7 +558,7 @@
         </section>
         <section>
           <h4>Trustable ?</h4>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Promise.resolve</li>
             <li class="fragment">If pass a non-thenable value, it returns a new genuine promise
             fulfilled with that value</li>
@@ -574,7 +574,7 @@
         <section>
           <section>
             <h4>Chain flow</h4>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">The value returned from a fulfillment callback is automatically
               set as the fulfillment of the next chained promise</li>
             </ul>
@@ -596,7 +596,7 @@
         <section>
           <section>
             <h3>Promise advanced</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Default handlers</li>
             </ul>
             <pre><code class="hljs" data-trim>
@@ -618,7 +618,7 @@
         </section>
         <section>
           <h3>Promise advanced</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Fulfill handler unwrap promise value</li>
             <li class="fragment">Error handler does not unwrap promise value</li>
           </ul>
@@ -626,7 +626,7 @@
         <section>
           <section>
             <h3>Promise advanced</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Swallowed errors</li>
               <li class="fragment">If an error is thrown in then callbacks, it will affect the next
               chained promise</li>
@@ -646,7 +646,7 @@
         </section>
         <section>
           <h3>Promise patterns</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment"><code>Promise.all([])</code></li>
             <li class="fragment">Fulfilled if every promise are fulfilled. If one is rejected,
             Promise.all is immediately rejected</li>
@@ -659,7 +659,7 @@
         </section>
         <section>
           <h3>Promise patterns</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment"><code>Promise.race([])</code></li>
             <li class="fragment">Argument: array of promise instances</li>
             <li class="fragment">Fulfilled when any promise fulfill, and rejected when any promise
@@ -675,9 +675,9 @@
         </section>
         <section>
           <h3>Promise limitations</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Error management
-              <ul class="no-bullet">
+              <ul class="small-bullet">
                 <li class="fragment">Can handle error at the end of the chain</li>
                 <li class="fragment">But errors might be silenced inside the chain</li>
                 <li class="fragment">Same as try/catch statement that silent an error</li>
@@ -693,11 +693,11 @@
         </section>
         <section>
           <h3>Generators</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Express async flow control in a sequential style</li>
             <li class="fragment">Iterable: object with a Symbol.iterator property</li>
             <li class="fragment">Iterator: object with
-              <ul class="no-bullet">
+              <ul class="small-bullet">
                 <li class="fragment"><code>next()</code> method</li>
                 <li class="fragment"><code>value</code> property</li>
                 <li class="fragment"><code>done</code> property</li>
@@ -714,7 +714,7 @@
         <section>
           <section>
             <h3>Generators</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">When called, a generator function will return an iterator</li>
               <li class="fragment">When a value is consumed with the iterator (<code>next</code>
               method), the generator function executes until it encounters the
@@ -740,7 +740,7 @@
         <section>
           <section>
             <h3>Generators</h3>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Multiple iterators</li>
               <li class="fragment">Interleaving</li>
             </ul>
@@ -760,7 +760,7 @@
         </section>
         <section>
           <h3>Generators</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">What if we yield a promise ?</li>
             <li class="fragment">Pause the generator by getting back a promise, and resume it when
             that promise fulfills or rejects !!!</li>
@@ -771,7 +771,7 @@
         <section>
           <section>
             <h2>Async/await</h2>
-            <ul class="no-bullet">
+            <ul class="small-bullet">
               <li class="fragment">Async control flow ... in a sequential way !!! Awesome !!!</li>
             </ul>
             <img src="/images/ampoule.png" alt="" class="fragment">
@@ -794,7 +794,7 @@
         <section>
           <h2>TL;DR</h2>
           <h3>Previous limitations:</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Code boilerplate</li>
             <li class="fragment">Error management</li>
             <li class="fragment">No reference to intermediate steps</li>
@@ -802,7 +802,7 @@
         </section>
         <section>
           <h3>Still:</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Single value parameter</li>
             <li class="fragment">Only single resolution</li>
             <li class="fragment">Cannot be canceled</li>
@@ -812,7 +812,7 @@
         </section>
         <section>
           <h3>To be continued:</h3>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">Observables</li>
             <li class="fragment">Multiple events (data streams)</li>
             <li class="fragment">Cancelable</li>
@@ -827,7 +827,7 @@
         </section>
         <!--section>
           <h2>Sources</h2>
-          <ul class="no-bullet">
+          <ul class="small-bullet">
             <li class="fragment">https://nodejs.org/en/docs/guides/dont-block-the-event-loop/</li>
             <li class="fragment">https://blog.hellojs.org/asynchronous-javascript-from-callback-hell-to-async-and-await-9b9ceb63c8e8</li>
             <li class="fragment">https://scotch.io/courses/10-need-to-know-javascript-concepts/callbacks-promises-and-async</li>
